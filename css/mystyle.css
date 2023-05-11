@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.invoice-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    color: #555;
+}
+
+input {
+    border: white;
+}
+
+
+
+.v {
+    margin-left: 30px;
+    margin-bottom: 0;
+
+
+}
+
+.table .hd {
+    border: none;
+    display: flex;
+}
+
+@media print {
+    .invoice-container {
+        max-width: unset;
+        box-shadow: none;
+        border: 0px;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+
+#draft_table {
+    width: 100%;
+}
+
+@media only screen and(max-width: 600px) {
+    .invoice-container table tr.top table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .invoice-container table tr.information table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}

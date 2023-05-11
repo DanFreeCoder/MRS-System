@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+background:#F4F4F4;
+}
+.imgprop
+{
+  width:95%;
+  position: relative;
+  margin-bottom: 18px;
+  line-height: 1;
+  -moz-box-shadow: 2px 2px 2px #888;
+  -webkit-box-shadow: 10px 10px 5px #888;
+  box-shadow: 0 2px 2px #7d7d7d;
+}
+
+/* CSS used here will be applied after bootstrap.css */
+.badge-notify{
+   background:red;
+   position:absolute;
+   top:0px;
+  }
+
+a
+{
+	color:#5cb85c;
+}
+
+.btn-link{
+  
+	background-color: #5cb85c;
+}
+
+.nav .open>a,.nav .open>a:hover,.nav .open>a:focus
+{
+	background-color:#eee;
+	border-color:#5cb85c;
+}
+
+  /* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.nav-pills>li>a{
+  border-radius:0px
+}
+.
+.carousel-caption{
+  right:0%;
+  left:0%;
+  
+}
+.btn-square
+{
+  border-radius: 0px;
+}
+
+.nopad {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
