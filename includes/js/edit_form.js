@@ -1,9 +1,8 @@
 $(document).ready(function () {
     $('.select2').select2();
 
-    $('#project_type').on('change', function () {
+    $('#project_type').on('change', () => {
         var selectedVal = $(this).val();
-
         $.ajax({
             type: 'POST',
             url: 'controls/get_cip_acc.php',
@@ -20,7 +19,7 @@ $(document).ready(function () {
 
     //add row
     var count = 1;
-    $(document).on('click', '#addrow', function () {
+    $(document).on('click', '#addrow', () => {
         count = count + 1;
         var html = `<tr id="row${count}">`;
         html += `
@@ -38,12 +37,12 @@ $(document).ready(function () {
 
     });
 
-    $('#clear').on('click', function () {
+    $('#clear').on('click', () => {
         $('.editable-cell').text('');
     })
 
     //remove existing data from database
-    $('.remove').on('click', function () {
+    $('.remove').on('click', () => {
         var drafted_id = $(this).attr('value');
 
         $.ajax({
@@ -134,29 +133,140 @@ $(document).ready(function () {
         for (r of remarks) {
             var re = r;
         }
+        var r1_col_id1 = data[0][0];//id
+        var r1_col1 = data[0][1];
+        var r1_col2 = data[0][2];
+        var r1_col3 = data[0][3];
+        var r1_col4 = data[0][4];
+        var r2_col_id2 = data[1][0];//id
+        var r2_col1 = data[1][1];
+        var r2_col2 = data[1][2];
+        var r2_col3 = data[1][3];
+        var r2_col4 = data[1][4];
+        var r3_col_id3 = data[2][0];//id
+        var r3_col1 = data[2][1];
+        var r3_col2 = data[2][2];
+        var r3_col3 = data[2][3];
+        var r3_col4 = data[2][4];
+        var r4_col_id4 = data[3][0];//id
+        var r4_col1 = data[3][1];
+        var r4_col2 = data[3][2];
+        var r4_col3 = data[3][3];
+        var r4_col4 = data[3][4];
+        var r5_col_id5 = data[4][0];//id
+        var r5_col1 = data[4][1];
+        var r5_col2 = data[4][2];
+        var r5_col3 = data[4][3];
+        var r5_col4 = data[4][4];
 
         var mydata = 'id=' + id + '&user_id=' + user_id + '&project=' + project + '&project_type=' + project_type + '&classification=' + classification + '&sub_class=' + sub_class + '&cip_account=' + cip_account + '&approver=' + approver + '&data=' + JSON.stringify(data) + '&id=' + id + '&count=' + count;
 
         if (project != '' && project_type != '' && classification != '' && cip_account != '') {
-            if (x == '') {
-                toastr.error('Quantity is mandatory.').css("background-color", "#ff5e57");
-            } else if (o == '') {
-                toastr.error('UOM is mandatory.').css("background-color", "#ff5e57");
-            } else if (y == '') {
-                toastr.error('Item code is mandatory.').css("background-color", "#ff5e57");
-            } else if (z == '') {
-                toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
-            } else {
-                form_update(mydata);
+            switch (true) {
+                case r1_col1.length == 0 || r1_col2.length == 0 || r1_col3.length == 0 || r1_col4.length == 0:
+                    toastr.error(`Please fill out the item descriptions.`).css("background-color", "#ff5e57");
+                    break;
+                // second row start
+                case r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length != 0:
+                    toastr.error(`Quantity is mandatory.`).css("background-color", "#ff5e57");
+                    break;
+                case r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length != 0 && r2_col4.length != 0:
+                    toastr.error(`UOM is mandatory.`).css("background-color", "#ff5e57");
+                    break;
+                case r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length != 0:
+                    toastr.error(`Item code is mandatory.`).css("background-color", "#ff5e57");
+                    break;
+                case r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length == 0:
+                    toastr.error(`Descriptions is mandatory.`).css("background-color", "#ff5e57");
+                    break;
+                //
+                case r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length != 0:
+                    toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
+                    break;
+                //
+                //second row end
+                // third row start
+                case r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length != 0:
+                    toastr.error('Quantity is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length != 0 && r3_col4.length != 0:
+                    toastr.error('UOM is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length != 0:
+                    toastr.error('Item code is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length == 0:
+                    toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                //
+                case r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length != 0:
+                    toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
+                    break;
+                //
+                //third row end
+                // fourth row start
+                case r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length != 0:
+                    toastr.error('Quantity is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length != 0 && r4_col4.length != 0:
+                    toastr.error('UOM is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length != 0:
+                    toastr.error('Item code is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length == 0:
+                    toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                //
+                case r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length != 0:
+                    toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
+                    break;
+                //
+                //fourth row end
+                // fifth row start
+                case r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length != 0:
+                    toastr.error('Quantity is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length != 0 && r5_col4.length != 0:
+                    toastr.error('UOM is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length != 0:
+                    toastr.error('Item code is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                case r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length == 0:
+                    toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
+                    break;
+                //
+                case r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length != 0:
+                    toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
+                    break;
+                //
+                //fifth row end
+                //if the other row is blank
+                case (r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length == 0) || (r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0) || (r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0) || (r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0) || (r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0):
+                    form_update(mydata);
+                    break;
+
+                default:
+                    if (x == '') {
+                        toastr.error('Quantity is mandatory.').css("background-color", "#ff5e57");
+                    } else if (o == '') {
+                        toastr.error('UOM is mandatory.').css("background-color", "#ff5e57");
+                    } else if (y == '') {
+                        toastr.error('Item code is mandatory.').css("background-color", "#ff5e57");
+                    } else if (z == '') {
+                        toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
+                    } else {
+                        form_update(mydata);
+                    }
             }
+
         } else {
             //show toast
             toastr.error(`Fields with asterisks(*) are required`).css("background-color", "#ff5e57");
 
         }
     })
-
-
     form_update = (mydata) => {
         $.ajax({
             type: 'POST',
@@ -178,7 +288,7 @@ $(document).ready(function () {
         });
     }
 
-    function reload(duration) {
+    reload = (duration) => {
         setTimeout(function () {
             location.reload();
         }, duration)

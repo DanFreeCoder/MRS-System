@@ -1,16 +1,15 @@
 $(document).ready(function () {
 
-
     var uname = location.search.split('uname=')[1] // get the GET value 
     $('#username').val(uname);
 
-    $('#ok').on('click', function () {
+    $('#ok').on('click', () => {
         window.location = "home.php";
     })
 
 
     //login
-    $('#login').on('click', function (e) {
+    $('#login').on('click', (e) => {
         e.preventDefault();
         var username = $('#username').val();
         var password = $('#password').val();

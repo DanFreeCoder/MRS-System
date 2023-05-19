@@ -28,6 +28,7 @@
 </head>
 
 <body style="background-color: #f1f1f3; padding-top:20px;">
+
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <!-- hide sidebar -->
@@ -281,15 +282,12 @@
                 </div>
             </div>
         </div>
-
     </div>
     </div>
-
 
     <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="dist/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/jqueryv3.6.4/jquery.min.js"></script>
     <script src="dist/datatable/jquery.dataTables.min.js"></script>
     <script src="dist/datatable/dataTables.bootstrap.min.js"></script>
     <script src="assets/toastr/toastr.min.js"></script>

@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 
 
-    $('#create').on('click', function (e) {
+    $('#create').on('click', (e) => {
         e.preventDefault();
         var myStr = $('#email').val();
         var last = myStr.substring(myStr.lastIndexOf("@") + 1);

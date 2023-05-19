@@ -5,28 +5,28 @@ $(document).ready(function () {
             location.reload();
         }, duration)
     }
-    $('#admin_side').on('click', function () {
+    $('#admin_side').on('click', () => {
         window.location = "adminpage/dashboard.php?click=" + 'man';
     })
 
-    $('#logout').on('click', function () {
+    $('#logout').on('click', () => {
         $('#log_out').modal('show');
     });
-    $('#out').on('click', function () {
+    $('#out').on('click', () => {
         window.location = "../mrf/controls/logout.php";
     });
 
 
-    $('#settings').on('click', function (e) {
+    $('#settings').on('click', (e) => {
         e.preventDefault();
         $('#settingmodal').modal('show');
     });
 
-    $('#clear').on('click', function () {
+    $('#clear').on('click', () => {
         $('.editable-cell').text('');
     })
     //modal update user settings
-    $('#save_upd').on('click', function (e) {
+    $('#save_upd').on('click', (e) => {
         e.preventDefault();
         const password = $('#password').val();
         const retype = $('#retype_password').val();

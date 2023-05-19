@@ -23,9 +23,7 @@
     <link rel="stylesheet" href="assets/toastr/toastr.min.css">
     <link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://nightly.datatables.net/css/jquery.dataTables.css">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="dist/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -136,15 +134,8 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="dist/js/jquery.min.js" type="text/javascript"></script>
-    <script src="dist/js/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="dist/js/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="dist/js/bootstrap.js" type="text/javascript"></script>
-    <script src="dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
-
+    <script src="dist/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/jqueryv3.6.4/jquery.min.js" type="text/javascript"></script>
     <script src="assets/toastr/toastr.min.js"></script>
     <script src="assets/select2/js/select2.min.js"></script>
     <script src="includes/js/register.js"></script>

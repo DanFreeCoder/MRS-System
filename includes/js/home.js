@@ -1,6 +1,9 @@
 $(document).ready(function () {
+
     //select two
-    // $('.select2').select2();
+    $('.select2').select2({
+        dropdownParent: $('#mrf_modal')
+    });
 
     function reload(time) {
         setTimeout(function () {
@@ -138,13 +141,13 @@ $('#print_as_blank').on('click', function () {
 })
 
 
-$('#blank').on('click', function () {
+$('#blank').on('click', () => {
     $('#mrf_modal').modal('show');
 });
 
 
 
-$('#project_type').on('change', function () {
+$('#project_type').on('change', () => {
     var selectedVal = $(this).val();
 
     $.ajax({

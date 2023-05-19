@@ -1,26 +1,26 @@
 $(document).ready(function () {
 
-    $('#admin_side').on('click', function () {
+    $('#admin_side').on('click', () => {
         window.location = "adminpage/dashboard.php?click=" + 'man';
     })
 
-    $('#logout').on('click', function () {
+    $('#logout').on('click', () => {
         $('#log_out').modal('show');
     });
-    $('#out').on('click', function () {
+    $('#out').on('click', () => {
         window.location = "../mrf/controls/logout.php";
     });
     // user settings
-    $('#settings').on('click', function (e) {
+    $('#settings').on('click', (e) => {
         e.preventDefault();
         $('#settingmodal').modal('show');
     });
 
-    $('#clear').on('click', function () {
+    $('#clear').on('click', () => {
         $('.editable-cell').text('');
     })
     //modal update user settings
-    $('#save_upd').on('click', function (e) {
+    $('#save_upd').on('click', (e) => {
         e.preventDefault();
         const password = $('#password').val();
         const retype = $('#retype_password').val();
@@ -54,7 +54,7 @@ $(document).ready(function () {
 
     $('.select2').select2();
 
-    $('#generate').click(function () {
+    $('#generate').on('click', () => {
 
 
         var project = $('#project').val();
@@ -235,7 +235,7 @@ $(document).ready(function () {
                 //fifth row end
                 //if the other row is blank
                 case (r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length == 0) || (r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0) || (r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0) || (r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0) || (r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0):
-                    exe_generate();
+                    exe_generate(mydata);
                     break;
 
                 default:
@@ -248,7 +248,7 @@ $(document).ready(function () {
                     } else if (z == '') {
                         toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
                     } else {
-                        exe_generate();
+                        exe_generate(mydata);
                     }
             }
 
@@ -257,35 +257,29 @@ $(document).ready(function () {
             toastr.error(`Fields with asterisks(*) are required`).css("background-color", "#ff5e57");
 
         }
-
-
-
-
-
-        function exe_generate() {
-
-            $.ajax({
-                type: 'POST',
-                url: 'controls/insert.php',
-                data: mydata,
-
-                success: function (response) {
-                    if (response > 0) {
-                        window.open("TCPDF-main/examples/MRF_report.php", '_blank');
-                        toastr.success(`Generated Successfully`).css("background-color", "#05c46b");
-                    } else {
-                        toastr.error(`ERROR! Please get in touch with the system administrator at local number 124.`).css("background-color", "#ff5e57");
-                    }
-
-                }
-            });
-        }
-
-
     });
+
+    exe_generate = (mydata) => {
+
+        $.ajax({
+            type: 'POST',
+            url: 'controls/insert.php',
+            data: mydata,
+
+            success: function (response) {
+                if (response > 0) {
+                    window.open("TCPDF-main/examples/MRF_report.php", '_blank');
+                    toastr.success(`Generated Successfully`).css("background-color", "#05c46b");
+                } else {
+                    toastr.error(`ERROR! Please get in touch with the system administrator at local number 124.`).css("background-color", "#ff5e57");
+                }
+
+            }
+        });
+    }
     //add row
     var count = 1;
-    $('#addrow').on('click', function () {
+    $('#addrow').on('click', () => {
         count = count + 1;
         var html = `<tr id="row${count}">`;
         html += `
@@ -302,13 +296,13 @@ $(document).ready(function () {
 
     });
     //remove row
-    $(document).on('click', '.remove', function () {
+    $(document).on('click', '.remove', () => {
         var delete_row = $(this).data('row');
         $('#' + delete_row).remove();
     })
 
     //save as draft
-    $(document).on('click', '.draft', function () {
+    $(document).on('click', '.draft', () => {
         var project = $('#project').val();
         var project_type = $('#project_type').val();
         var classification = $('#classification').val();
@@ -327,8 +321,6 @@ $(document).ready(function () {
         });
 
         var mydata = 'project=' + project + '&project_type=' + project_type + '&classification=' + classification + '&sub_class=' + sub_class + '&cip_account=' + cip_account + '&approver=' + approver + '&data=' + JSON.stringify(data);
-
-
         if (project != '' && project_type != '' && classification != '' && cip_account != '' && approver != '') {
             $.ajax({
                 type: 'POST',
@@ -358,7 +350,7 @@ $(document).ready(function () {
 
     });
 
-    $('#project_type').on('change', function () {
+    $('#project_type').on('change', () => {
         var selectedVal = $(this).val();
 
         $.ajax({

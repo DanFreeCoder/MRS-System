@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#recover').on('click', function (e) {
+    $('#recover').on('click', (e) => {
         e.preventDefault();
         var email = $('#email').val();
         if (email != '') {
@@ -14,16 +14,14 @@ $(document).ready(function () {
                     if (response > 0) {
                         $('#email_sent').modal('show');
                     } else {
-                        toastr.error(`ERROR! Email request failed. Please get in touch with the system administrator at local number 124.`).css("background-color", "#ff5e57");
+                        toastr.error(`Please verify the email you entered.`).css("background-color", "#ff5e57");
                     }
                 }
             })
         } else {
             toastr.error(`Enter your email`).css("background-color", "#ff5e57");
         }
-
     })
-
 });
 
 

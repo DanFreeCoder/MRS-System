@@ -145,7 +145,7 @@ $CIP_type = new clsType($db);
                         <div class="col-4 mb-2">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Sub-Classification <span style="color:red;">*</span></div>
-                            <input type="text" id="sub_class" value="<?php echo $sub_class1 ?>" class="form-control">
+                            <input type="text" class="form-control text-secondary" id="sub_class" value="<?php echo $sub_class1 ?>">
                         </div>
                         <div class="col-5 mb-3">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
@@ -167,7 +167,7 @@ $CIP_type = new clsType($db);
                         <div class="col-3 mb-2">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Approver <span style="color:red;">*</span></div>
-                            <input type="text" class="form-control" id="approver" value="<?php echo $approver1 ?>" placeholder="Enter Approver">
+                            <input type="text" class="form-control text-secondary" id="approver" value="<?php echo $approver1 ?>" placeholder="Enter Approver">
                         </div>
 
                     </div>
@@ -193,7 +193,7 @@ $CIP_type = new clsType($db);
                                             Quantity
                                         </th>
                                         <th style="width: 5rem;">
-                                            OUM
+                                            UOM
                                         </th>
                                         <th style="width: 7rem;">
                                             Item Code
@@ -278,8 +278,8 @@ $CIP_type = new clsType($db);
 
     <!-- Bootstrap core JS-->
     <!-- <script src="assets/toastr/toastr.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="dist/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/jqueryv3.6.4/jquery.min.js"></script>
 
     <script src="assets/toastr/toastr.min.js"></script>
     <script src="assets/select2/js/select2.min.js"></script>
