@@ -1,24 +1,29 @@
 $(document).ready(function () {
+    //select two
+    // $('.select2').select2();
 
     function reload(time) {
         setTimeout(function () {
             location.reload();
         }, time);
     }
+
+
+
     $('#admin_side').on('click', function () {
         window.location = "adminpage/dashboard.php?click=" + 'man';
     })
     //delete zero status in item_as_draft table // this is for amdin
-    $.ajax({
-        type: 'POST',
-        url: 'controls/delete_zero_status',
+    // $.ajax({
+    //     type: 'POST',
+    //     url: 'controls/delete_zero_status',
 
-        success: function (response) {
-            if (response > 0) {
-                alert('rows has been remove');
-            }
-        }
-    })
+    //     success: function (response) {
+    //         if (response > 0) {
+    //             alert('rows has been remove');
+    //         }
+    //     }
+    // })
 
     $('.submitted_table').dataTable();
     $('.draft_table').dataTable();
@@ -153,6 +158,7 @@ $('#project_type').on('change', function () {
         }
     })
 })
+
 
 
 

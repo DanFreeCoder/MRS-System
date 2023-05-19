@@ -128,7 +128,6 @@
                                         <th>Item Code</th>
                                         <th>Brand</th>
                                         <th>Description</th>
-                                        <th>Specs</th>
                                         <th>Remarks</th>
                                     </tr>
                                 </thead>

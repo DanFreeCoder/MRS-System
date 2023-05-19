@@ -50,6 +50,31 @@ class clsType
         return $sel;
     }
 
+    public function CIP_type2()
+    {
+        $sql = "SELECT * FROM " . $this->tbl_CIP_type .  " WHERE id= ? AND status != 0";
+        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $sel = $this->con->prepare($sql);
+
+        $sel->bindParam(1, $this->id);
+
+        $sel->execute();
+
+        return $sel;
+    }
+    public function CIP_type3()
+    {
+        $sql = "SELECT * FROM " . $this->tbl_CIP_type .  " WHERE status != 0";
+        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $sel = $this->con->prepare($sql);
+
+        $sel->bindParam(1, $this->id);
+
+        $sel->execute();
+
+        return $sel;
+    }
+
     public function get_class()
     {
         $sql = "SELECT * FROM " . $this->tbl_classification .  " WHERE status != 0";

@@ -38,13 +38,13 @@ $data = json_decode($_POST['data']);
 
 foreach ($data as $row) {
     $col1 = $row[0]; //id
-    $col2 = $row[1];
-    $col3 = $row[2];
-    $col4 = $row[3];
+    $col2 = $row[1]; //qty
+    $col3 = $row[2]; //uom
+    $col4 = $row[3]; //itemcode
     // $col5 = $row[4];
-    $col6 = $row[4];
+    $col6 = $row[4]; //description
     // $col7 = $row[6];
-    $col8 = $row[5];
+    $col8 = $row[5]; //remarks
 
     $itemdescriptions->qty = $col2;
     $itemdescriptions->oum = $col3;

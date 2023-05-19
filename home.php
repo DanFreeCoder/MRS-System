@@ -12,11 +12,19 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/mystyle.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="assets/toastr/toastr.min.css">
+    <link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="dist/datatable/dataTables.bootstrap5.min.css">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            font-weight: 500;
+        }
+    </style>
 </head>
 
 <body style="background-color: #f1f1f3; padding-top:20px;">
@@ -47,6 +55,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="submitted_tab" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-responsive">
+                                <br>
                                 <table class="table sub_table table-hover submitted_table" style="background-color:#f8f9fa;" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -65,6 +74,9 @@
                                                 <center>CIP Account</center>
                                             </th>
                                             <th>
+                                                <center>Approver</center>
+                                            </th>
+                                            <th>
                                                 <center>Control No.</center>
                                             </th>
                                             <th>
@@ -76,14 +88,17 @@
                                         <?php
                                         $submitted = $tbl_details->submitted_data();
                                         while ($row = $submitted->fetch(PDO::FETCH_ASSOC)) {
+
+                                            $date = date('F j, Y', strtotime($row['date_added']));
                                             echo '
                                             <tr>
-                                            <td>' . $row['date_added'] . '</td>
+                                            <td>' . $date . '</td>
                                             <td>' . $row['Project'] . '</td>
                                             <td>' . $row['project_type'] . '</td>
                                             <td>' . $row['classif'] . '</td>
                                             <td>' . $row['sub_class'] . '</td>
                                             <td>' . $row['cip_name'] . '</td>
+                                            <td>' . $row['approver'] . '</td>
                                             <td>' . $row['con_num'] . '</td>
                                             <td><a href="#" value="' . $row['id'] . '" class="views" >View</a> | <a href="#" value="' . $row['id'] . '" class="print" >Print</a></td>
                                             </tr>
@@ -96,6 +111,7 @@
                         </div>
                         <div class="tab-pane fade" id="draft_tab" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-responsive">
+                                <br>
                                 <table class="table table-hover draft_table" style="width: 100%; background-color:#f8f9fa;" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -122,9 +138,10 @@
                                         <?php
                                         $drafted = $tbl_details->drafted_data();
                                         while ($row = $drafted->fetch(PDO::FETCH_ASSOC)) {
+                                            $date2 = date('F j, Y', strtotime($row['date_added']));
                                             echo '
                                             <tr>
-                                            <td>' . $row['date_added'] . '</td>
+                                            <td>' . $date2 . '</td>
                                             <td>' . $row['Project'] . '</td>
                                             <td>' . $row['project_type'] . '</td>
                                             <td>' . $row['classif'] . '</td>
@@ -212,7 +229,6 @@
                                             <option value="' . $row2['id'] . '">' . $row2['project_type'] . '</option>
                                             ';
                                     }
-
                                     ?>
                                 </select>
                             </div>
@@ -239,13 +255,13 @@
                             <div>
                                 <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                                 <div class="label">Sub-Classification <span style="color:red;">*</span></div>
-                                <input type="email" class="form-control" id="sub_class" placeholder="Enter  Sub-Classification">
+                                <input type="text" class="form-control" id="sub_class" placeholder="Enter  Sub-Classification">
                             </div>
                         </div>
                         <div class="row">
                             <div>
                                 <div class="label">Approver <span style="color:red;">*</span></div>
-                                <input type="email" class="form-control" id="approver" placeholder="Enter  Approver">
+                                <input type="text" class="form-control" id="approver" placeholder="Enter  Approver">
                             </div>
                         </div>
                         <div class="row">
@@ -272,14 +288,10 @@
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="dist/datatable/jquery-3.1.5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="dist/datatable/jquery.dataTables.min.js"></script>
     <script src="dist/datatable/dataTables.bootstrap.min.js"></script>
-    <script src="dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
-
-
     <script src="assets/toastr/toastr.min.js"></script>
     <script src="assets/select2/js/select2.min.js"></script>
     <script src="includes/js/home.js"></script>

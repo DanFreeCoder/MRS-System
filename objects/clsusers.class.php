@@ -71,6 +71,25 @@ class Users
         }
     }
 
+    public function update_user()
+    {
+        $sql = "UPDATE users SET firstname = ?, lastname = ?, email=?, account_type=?, username=? WHERE id=?";
+        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $upd = $this->con->prepare($sql);
+
+        $upd->bindParam(1, $this->firstname);
+        $upd->bindParam(2, $this->lastname);
+        $upd->bindParam(3, $this->email);
+        $upd->bindParam(4, $this->account_type);
+        $upd->bindParam(5, $this->username);
+        $upd->bindParam(6, $this->id);
+
+        if ($upd->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function recover_account()
     {
         $sql = "UPDATE users SET password = ? WHERE email = ? AND status != ?";

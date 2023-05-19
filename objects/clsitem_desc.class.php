@@ -11,7 +11,7 @@ class clsitem_descriptions
 
     public function submitted_data()
     {
-        $sql = "SELECT generateddata.id, generateddata.date_added, projects.Project, type_of_project.project_type, CONCAT(class_of_item.class_item_id, '-', class_of_item.items) as classif, generateddata.sub_class, cip_type.cip_account as cip_name, generateddata.con_num FROM generateddata, projects, type_of_project, class_of_item, cip_type WHERE generateddata.project = projects.id AND generateddata.typeof_project = type_of_project.id AND generateddata.classification = class_of_item.class_item_id  AND generateddata.cip_account = cip_type.id AND generateddata.status != 4 AND generateddata.status != 2 AND generateddata.user_id = " . $_SESSION['id'] . " AND generateddata.status != 0 ORDER BY generateddata.con_num DESC";
+        $sql = "SELECT generateddata.id, generateddata.date_added, generateddata.approver, projects.Project, type_of_project.project_type, CONCAT(class_of_item.class_item_id, '-', class_of_item.items) as classif, generateddata.sub_class, cip_type.cip_account as cip_name, generateddata.con_num FROM generateddata, projects, type_of_project, class_of_item, cip_type WHERE generateddata.project = projects.id AND generateddata.typeof_project = type_of_project.id AND generateddata.classification = class_of_item.class_item_id  AND generateddata.cip_account = cip_type.id AND generateddata.status != 4 AND generateddata.status != 2 AND generateddata.user_id = " . $_SESSION['id'] . " AND generateddata.status != 0 ORDER BY generateddata.con_num DESC";
         $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $sel = $this->con->prepare($sql);
 
@@ -31,7 +31,6 @@ class clsitem_descriptions
         return $sel;
     }
 
-
     public function view_item_desc_by_id()
     {
         $sql = "SELECT id, qty, oum, itemcode, description, remarks FROM item_description WHERE item_id = ? AND user_id = ? AND status != 0 AND status != 4"; //generateddata id
@@ -46,9 +45,11 @@ class clsitem_descriptions
         return $view;
     }
 
+
+
     public function view_item_detail_by_id()
     {
-        $sql = "SELECT qty, oum, itemcode, brand, description, color, remarks FROM item_description WHERE item_id = ? AND status != 0 AND status != 4"; //generateddata id
+        $sql = "SELECT qty, oum, itemcode, description, remarks FROM item_description WHERE item_id = ? AND status != 0 AND status != 4"; //generateddata id
         $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $view = $this->con->prepare($sql);
 

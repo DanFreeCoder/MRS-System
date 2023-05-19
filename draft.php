@@ -16,6 +16,18 @@
     <link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body style="background-color: #f1f1f3; padding:20px;">
@@ -29,9 +41,23 @@
             <?php include 'includes/navigation.php'; ?>
             <div class="container" style="margin-top: 100px;">
 
-                <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px #888888;">
+                <?php
+                $id = $_GET['id'];
+
+                $view_description_draft->id = $_GET['id'];
+                $result = $view_description_draft->drafted_data();
+                while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $project1 = $rows['project'];
+                    $project_type1 = $rows['typeof_project'];
+                    $classname1 = $rows['classification'];
+                    $sub_class1 = $rows['sub_class'];
+                    $approver1 = $rows['approver'];
+                    $cipname1 = $rows['cip_account'];
+                }
+                ?>
+                <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
                     <center>
-                        <h3 class="mb-5">Material Requisition Form</h3>
+                        <h3 class="mb-5">Material Requisition Slip</h3>
                         <input type="text" id="get_id" value="<?php $_GET['id']; ?>" hidden>
                     </center>
                     <div class="row">
@@ -39,19 +65,14 @@
                             <div class="label">Project <span style="color:red;">*</span></div>
                             <select type="text" id="project" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <?php
-                                //get save as draft project
-                                $view_draft->id = $_GET['id'];
-                                $get_draft_pro = $view_draft->view_pro_draft();
-                                while ($view_pro = $get_draft_pro->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '
-                                    <option class="form-control" value="' . $view_pro['pro_id'] . '" selected>' . $view_pro['pro_name'] . '</option>
-                                    ';
-                                }
+
                                 $getpro = $projects->projects();
                                 while ($row = $getpro->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '
-                                    <option  value="' . $row['id'] . '">' . $row['Project'] . '</option>
-                                    ';
+                                    if ($row['id'] == $project1) {
+                                        echo '<option  value="' . $row['id'] . '" selected>' . $row['Project'] . '</option>';
+                                    } else {
+                                        echo '<option  value="' . $row['id'] . '">' . $row['Project'] . '</option>';
+                                    }
                                 }
                                 ?>
                             </select>
@@ -60,18 +81,15 @@
                             <div class="label mb-1">Type of Project <span style="color:red;">*</span></div>
                             <select type="text" id="project_type" class="select2 form-control js-example-basic-single" style="width: 100%">
                                 <?php
-                                //get save as draft type of project
-                                $view_pro_type_draft->id = $_GET['id'];
-                                $get_draft_pro_type = $view_pro_type_draft->view_draft_type_of_project();
-                                while ($view_pro_type = $get_draft_pro_type->fetch(PDO::FETCH_ASSOC)) {
-                                    echo ' <option value="' . $view_pro_type['pro_type_id'] . '" selected>' . $view_pro_type['pro_type_name'] . '</option>';
-                                }
+
 
                                 $get = $project_type->get_type_of_project();
                                 while ($row2 = $get->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '
-                                    <option value="' . $row2['id'] . '">' . $row2['project_type'] . '</option>
-                                    ';
+                                    if ($row2['id'] == $project_type1) {
+                                        echo '<option value="' . $row2['id'] . '" selected>' . $row2['project_type'] . '</option>';
+                                    } else {
+                                        echo '<option value="' . $row2['id'] . '">' . $row2['project_type'] . '</option>';
+                                    }
                                 }
                                 ?>
                             </select>
@@ -81,19 +99,20 @@
                             <div class="label">Classification <span style="color:red;">*</span></div>
                             <select type="text" id="classification" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <?php
-                                $view_classication_draft->id = $_GET['id'];
-                                $get_classification = $view_classication_draft->view_draft_classification();
-                                while ($view_class = $get_classification->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<option value="' . $view_class['class_id'] . '" selected>' . $view_class['class_name'] . '</option>';
-                                }
+                                // $view_classication_draft->id = $_GET['id'];
+                                // $get_classification = $view_classication_draft->view_draft_classification();
+                                // while ($view_class = $get_classification->fetch(PDO::FETCH_ASSOC)) {
+                                //     echo '<option value="' . $view_class['class_id'] . '" selected>' . $view_class['class_name'] . '</option>';
+                                // }
 
 
                                 $get_class = $classification->get_class();
-
                                 while ($rowc = $get_class->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '
-                                    <option  value="' . $rowc['class_item_id'] . '">' . $rowc['class_item_id'] . '-' . $rowc['items'] . '</option>
-                                    ';
+                                    if ($rowc['class_item_id'] == $classname1) {
+                                        echo '<option  value="' . $rowc['class_item_id'] . '" selected>' . $rowc['class_item_id'] . '-' . $rowc['items'] . '</option>';
+                                    } else {
+                                        echo '<option  value="' . $rowc['class_item_id'] . '">' . $rowc['class_item_id'] . '-' . $rowc['items'] . '</option>';
+                                    }
                                 }
                                 ?>
                             </select>
@@ -101,17 +120,7 @@
                         <div class="col-4 mb-2">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Sub-Classification <span style="color:red;">*</span></div>
-                            <?php
-                            $view_sub_class_draft->id = $_GET['id'];
-                            $get_sub_class = $view_sub_class_draft->view_draft_sub_class();
-                            while ($view_sub_class = $get_sub_class->fetch(PDO::FETCH_ASSOC)) {
-                                $id = $view_sub_class['id'];
-                                echo '<input type="text" class="form-control" value="' . $view_sub_class['sub_class'] . '" id="sub_class" placeholder="Enter  Sub-Classification">';
-
-                                $approver = $view_sub_class['approver'];
-                            }
-                            ?>
-
+                            <input type="text" class="form-control" value="<?php echo $sub_class1; ?>" id="sub_class" placeholder="Enter  Sub-Classification">
                             <input type="text" id="id" value="<?php echo $id; ?>" hidden>
                         </div>
                         <div class="col-5 mb-3">
@@ -119,10 +128,10 @@
                             <div class="label">CIP Account <span style="color:red;">*</span></div>
                             <select type="text" id="cip_account" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <?php
-                                $view_CIP_account_type_draft->id = $_GET['id'];
-                                $get_CIP = $view_CIP_account_type_draft->view_draft_CIP();
+                                $classification->id = $cipname1;
+                                $get_CIP = $classification->CIP_type2();
                                 while ($view_cip = $get_CIP->fetch(PDO::FETCH_ASSOC)) {
-                                    echo ' <option value="' . $view_cip['cip_type_id'] . '" selected>' . $view_cip['cip_name'] . '</option>';
+                                    echo ' <option value="' . $view_cip['cip_id'] . '" selected>' . $view_cip['cip_account'] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -130,7 +139,7 @@
                         <div class="col-3 mb-2">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Approver <span style="color:red;">*</span></div>
-                            <input type="text" class="form-control" id="approver" value="<?php echo $approver ?>" placeholder="Enter Approver">
+                            <input type="text" class="form-control" id="approver" value="<?php echo $approver1 ?>" placeholder="Enter Approver">
                         </div>
                     </div>
                 </div>
@@ -138,7 +147,7 @@
 
             <!-- sub main -->
             <div class="container-fluid mb-5">
-                <div class="sub-main mt-5 p-5 mb-5" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px #888888;">
+                <div class="sub-main mt-5 p-5 mb-5" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
                     <div class="row">
                         <center class="mb-3">
                             <h3>Item Descriptions</h3>
@@ -146,7 +155,6 @@
                         <form action="" method="post">
                             <div class="table-responsive">
                                 <button type="button" id="addrow" style="border-radius:100%; background-color:#5eb548; color:white; border:none;"><i class="bi bi-plus"></i></button>
-                                <div class="btn btn-info btn-sm mb-2 p-1" id="clear">Clear</div>
                                 <table class="table table-bordered bg-white table-hover">
                                     <thead>
                                         <th style="width: 1rem;" hidden>
@@ -178,10 +186,10 @@
                                                 <tr id="row">
                                                 <td class="editable-cell" hidden>' . $view_desc['id'] . '</td>
                                                 <td contenteditable class="editable-cell qty">' . $view_desc['qty'] . '</td>
-                                                <td contenteditable class="editable-cell">' . $view_desc['oum'] . '</td>
+                                                <td contenteditable class="editable-cell" oum>' . $view_desc['oum'] . '</td>
                                                 <td contenteditable class="editable-cell code">' . $view_desc['itemcode'] . '</td>
                                                 <td contenteditable class="editable-cell desc">' . $view_desc['description'] . '</td>
-                                                <td contenteditable class="editable-cell">' . $view_desc['remarks'] . '</td>
+                                                <td contenteditable class="editable-cell" remark>' . $view_desc['remarks'] . '</td>
                                                 <td style="width:2px; margin-right:0px;" class="drafted_id" "value="' . $view_desc['id'] . '"><a><i class="btn btn-danger btn-sm rounded-5 btn-sm bi bi-x remove" value="' . $view_desc['id'] . '"></i></a></td>
                                             </tr>
                                                 ';
@@ -192,15 +200,13 @@
                         </form>
                     </div>
                 </div>
-                <!-- alert for remove row -->
-                <div id="alert" style="display:flex; justify-content:right;">
-
-                </div>
-                <button class="btn btn-sm mt-5 btn-success update" type="submit" id="update" name="update">Update</button>
-                <button class="btn btn-sm mt-5 btn-success upd_gen" type="submit" id="upd_gen" name="upd_gen">Update & Generate</button>
-                <button class="btn btn-sm btn-success mt-5 generate" type="submit" id="generate" name="generate">Generate</button>
-                <button class="btn btn-sm btn-primary mt-5 draft" type="submit" name="draft">Save as Draft</button>
-                <button class="btn btn-sm btn-primary mt-5 draft_as_draft" type="submit" name="draft">Save as Draft</button>
+                <br>
+                <a class="p-2 bg-success text-light update" id="update" name="update" style=" border:none;"><i class="bi bi-arrow-repeat"><b></i> Update</b></a>
+                <a class="p-2 bg-success text-light upd_gen" id="upd_gen" name="upd_gen" style=" border:none;"><b><i class="bi bi-check2-all"></i> Update & Generate</b></a>
+                <a class="p-2 bg-success text-light generate" id="generate" name="generate" style=" border:none;">Generate</a>
+                <a class="p-2 bg-secondary text-light draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Save as Draft</b></a>
+                <a class="p-2 bg-secondary text-light draft_as_draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Save as Draft</b></a>
+                <a class="p-2 w-15 text-light bg-success mb-3 p-2 w-25" id="clear"><b><i class="bi bi-eraser"></i> Clear</b></a>
             </div>
         </div>
 

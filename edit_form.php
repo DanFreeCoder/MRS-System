@@ -42,6 +42,18 @@ $CIP_type = new clsType($db);
     <link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body style="background-color: #f1f1f3; padding:20px;">
@@ -53,36 +65,42 @@ $CIP_type = new clsType($db);
         <div id="page-content-wrapper">
             <!-- Top navigation-->
             <a href="adminpage/dashboard.php">
-                <div class="btn btn-secondary">Back</div>
+                <h3><i class="bi bi-arrow-left-square text-success"></i></h3>
             </a>
             <div class="container" style="margin-top: 100px;">
-                <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; ">
+                <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
 
                     <?php
                     $admin_side->id = $_GET['id'];
-                    $data = $admin_side->data();
+                    $data = $admin_side->data_submit();
                     while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
-                        $project_d = $row['Project'];
-                        $project_type_d = $row['project_type'];
-                        $classif_d = $row['classif'];
-                        $sub_class_d = $row['sub_class'];
-                        $cip_name_d = $row['cip_name'];
-                        $user_id = $row['user_id'];
+                        $project1 = $row['project'];
+                        $project_type_1 = $row['typeof_project'];
+                        $classif1 = $row['classification'];
+                        $sub_class1 = $row['sub_class'];
+                        $cip_name1 = $row['cip_account'];
+                        $approver1 = $row['approver'];
+                        $user_id1 = $row['user_id'];
                     }
                     ?>
                     <center>
-                        <h3 class="mb-5">Material Requisition Form</h3>
-                        <input type="text" id="get_id" value="<?php $_GET['id']; ?>" hidden>
+                        <h3 class="mb-5">Material Requisition Slip</h3>
+                        <input type="text" id="id" value="<?php echo $_GET['id']; ?>" hidden>
+                        <input type="text" id="user_id" value="<?php echo $_GET['user_id']; ?>" hidden>
                     </center>
                     <div class="row">
                         <div class="col-4 mb-2">
                             <div class="label">Project <span style="color:red;">*</span></div>
                             <select type="text" id="project" class="select2 form-control js-example-basic-single" style="width: 100%;">
-                                <option selected><?php echo $project_d ?></option>
+
                                 <?php
                                 $getpro = $projects->projects();
                                 while ($row = $getpro->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<option  value="' . $row['id'] . '">' . $row['Project'] . '</option>';
+                                    if ($row['id'] == $project1) {
+                                        echo '<option  value="' . $row['id'] . '" selected>' . $row['Project'] . '</option>';
+                                    } else {
+                                        echo '<option  value="' . $row['id'] . '">' . $row['Project'] . '</option>';
+                                    }
                                 }
                                 ?>
                             </select>
@@ -90,11 +108,16 @@ $CIP_type = new clsType($db);
                         <div class="col-4 mb-2">
                             <div class="label mb-1">Type of Project <span style="color:red;">*</span></div>
                             <select type="text" id="project_type" class="select2 form-control js-example-basic-single" style="width: 100%">
-                                <option selected><?php echo $project_type_d ?></option>
                                 <?php
                                 $get = $project_type->get_type_of_project();
                                 while ($row2 = $get->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<option value="' . $row2['id'] . '">' . $row2['project_type'] . '</option>';
+
+                                    if ($row2['id'] == $project_type_1) {
+                                        echo '<option value="' . $row2['id'] . '" selected>' . $row2['project_type'] . '</option>';
+                                    } else {
+                                        echo '<option value="' . $row2['id'] . '">' . $row2['project_type'] . '</option>';
+                                    }
+                                    $pro_type_id2 = $row2['id'];
                                 }
                                 ?>
                             </select>
@@ -103,13 +126,18 @@ $CIP_type = new clsType($db);
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Classification <span style="color:red;">*</span></div>
                             <select type="text" id="classification" class="select2 form-control js-example-basic-single" style="width: 100%;">
-                                <option selected><?php echo $classif_d ?></option>
                                 <?php
                                 $get_class = $classification->get_class();
                                 while ($rowc = $get_class->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '
-                                    <option  value="' . $rowc['class_item_id'] . '">' . $rowc['class_item_id'] . '-' . $rowc['items'] . '</option>
-                                    ';
+                                    if ($rowc['class_item_id'] == $classif1) {
+                                        echo '
+                                        <option  value="' . $rowc['class_item_id'] . '" selected>' . $rowc['class_item_id'] . '-' . $rowc['items'] . '</option>
+                                        ';
+                                    } else {
+                                        echo '
+                                        <option  value="' . $rowc['class_item_id'] . '">' . $rowc['class_item_id'] . '-' . $rowc['items'] . '</option>
+                                        ';
+                                    }
                                 }
                                 ?>
                             </select>
@@ -117,33 +145,45 @@ $CIP_type = new clsType($db);
                         <div class="col-4 mb-2">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Sub-Classification <span style="color:red;">*</span></div>
-                            <input type="text" id="sub_class" value="<?php echo $sub_class_d ?>" class="form-control">
-
-
-                            <!-- <input type="text" id="id" value="<?php echo $id; ?>" hidden> -->
+                            <input type="text" id="sub_class" value="<?php echo $sub_class1 ?>" class="form-control">
                         </div>
                         <div class="col-5 mb-3">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">CIP Account <span style="color:red;">*</span></div>
                             <select type="text" id="cip_account" class="select2 form-control js-example-basic-single" style="width: 100%;">
-                                <option selected><?php echo $cip_name_d ?></option>
+                                <?php
+                                $classification->id = $cip_name1;
+                                $get_CIP = $classification->CIP_type2();
+                                while ($view_cip = $get_CIP->fetch(PDO::FETCH_ASSOC)) {
+                                    if ($view_cip['id'] == $cip_name1) {
+                                        echo ' <option value="' . $view_cip['id'] . '" selected>' . $view_cip['cip_account'] . '</option>';
+                                    } else {
+                                        echo ' <option value="' . $view_cip['id'] . '">' . $view_cip['cip_account'] . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
+                        <div class="col-3 mb-2">
+                            <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
+                            <div class="label">Approver <span style="color:red;">*</span></div>
+                            <input type="text" class="form-control" id="approver" value="<?php echo $approver1 ?>" placeholder="Enter Approver">
+                        </div>
+
                     </div>
                 </div>
             </div>
 
             <!-- sub main -->
             <div class="container-fluid mb-5">
-                <div class="sub-main mt-5 p-5 mb-5" style="background-color:#f9f9fb; border-radius:5px;">
+                <div class="sub-main mt-5 p-5 mb-5" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
                     <div class="row">
                         <center class="mb-3">
                             <h3>Item Descriptions</h3>
                         </center>
                         <form action="" method="post">
                             <div class="table-responsive">
-                                <button type="button" id="addrow" style="border-radius:100%; background-color:#5eb548; color:white; border:none;"><i class="bi bi-plus"></i></button>
-                                <div class="btn btn-info btn-sm mb-2 p-1" id="clear">Clear</div>
+                                <!-- <button type="button" id="addrow" style="border-radius:100%; background-color:#5eb548; color:white; border:none;"><i class="bi bi-plus"></i></button> -->
                                 <table class="table table-bordered bg-white table-hover">
                                     <thead>
                                         <th style="width: 1rem;" hidden>
@@ -172,14 +212,15 @@ $CIP_type = new clsType($db);
                                         $tbl_details->user_id = $_GET['user_id'];
                                         $get_desc = $tbl_details->view_item_desc_by_id();
                                         while ($view_desc = $get_desc->fetch(PDO::FETCH_ASSOC)) {
+
                                             echo '
                                                 <tr id="row">
                                                 <td class="editable-cell" hidden>' . $view_desc['id'] . '</td>
                                                 <td contenteditable class="editable-cell qty">' . $view_desc['qty'] . '</td>
-                                                <td contenteditable class="editable-cell">' . $view_desc['oum'] . '</td>
+                                                <td contenteditable class="editable-cell oum ">' . $view_desc['oum'] . '</td>
                                                 <td contenteditable class="editable-cell code">' . $view_desc['itemcode'] . '</td>
                                                 <td contenteditable class="editable-cell desc">' . $view_desc['description'] . '</td>
-                                                <td contenteditable class="editable-cell">' . $view_desc['remarks'] . '</td>
+                                                <td contenteditable class="editable-cell  remark">' . $view_desc['remarks'] . '</td>
                                                 <td style="width:2px; margin-right:0px;" class="drafted_id" "value="' . $view_desc['id'] . '"><a><i class="btn btn-danger btn-sm rounded-5 btn-sm bi bi-x remove" value="' . $view_desc['id'] . '"></i></a></td>
                                             </tr>
                                                 ';
@@ -194,11 +235,8 @@ $CIP_type = new clsType($db);
                 <div id="alert" style="display:flex; justify-content:right;">
 
                 </div>
-                <button class="btn btn-sm mt-5 btn-success update" type="submit" id="update" name="update">Update</button>
-                <button class="btn btn-sm mt-5 btn-success upd_gen" type="submit" id="upd_gen" name="upd_gen">Update & Generate</button>
-                <button class="btn btn-sm btn-success mt-5 generate" type="submit" id="generate" name="generate">Generate</button>
-                <button class="btn btn-sm btn-primary mt-5 draft" type="submit" name="draft">Save as Draft</button>
-                <button class="btn btn-sm btn-primary mt-5 draft_as_draft" type="submit" name="draft">Save as Draft</button>
+                <a class="p-2 bg-success update text-light" id="update" name="update"><b><i class="bi bi-arrow-repeat"></i> Update</b></a>
+                <a class="p-2 w-15 text-light bg-success mb-3 p-2 w-25" id="clear"><b><i class="bi bi-eraser"></i> Clear</b></a>
             </div>
         </div>
 
@@ -247,7 +285,7 @@ $CIP_type = new clsType($db);
     <script src="assets/select2/js/select2.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
-    <script src="includes/js/draft_update.js"></script>
+    <script src="includes/js/edit_form.js"></script>
 
 </body>
 

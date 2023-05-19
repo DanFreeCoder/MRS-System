@@ -20,7 +20,7 @@ while ($row = $get_count_id->fetch(PDO::FETCH_ASSOC)) {
     $pro_id = $row['id'];
 }
 
-$pro_num = str_pad($number, 5, "0", STR_PAD_LEFT);
+$pro_num = str_pad($pro_id, 5, 0, STR_PAD_LEFT);
 
 $proj_code->id = $_POST['project'];
 $get_code_name = $proj_code->get_proj_code();

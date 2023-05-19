@@ -17,7 +17,7 @@ while ($row = $edit_user->fetch(PDO::FETCH_ASSOC)) {
 
     echo '
         <div class="mb-3">
-        <input type="text" class="form-control" id="upd-id" value="' . $id . '" hidden>
+        <input type="text" class="form-control upd-id" value="' . $id . '" hidden>
         <label class="form-label">Firstname</label>
         <input type="text" class="form-control" id="upd-firstname" value="' . $firstname . '">
     </div>
@@ -32,18 +32,17 @@ while ($row = $edit_user->fetch(PDO::FETCH_ASSOC)) {
     <div class="mb-3">
         <label class="form-label">Account Type</label>
         <select class="form-control select2" id="upd-account_user_type">';
-    if ($row['account_type'] != 1) {
-        echo '
-                <option value="1">Admin</option>
-                <option value="3" selected>Staff</option>
-                ';
-    } else {
+    if ($row['account_type'] != 3) {
         echo '
                 <option value="1" selected>Admin</option>
                 <option value="3">Staff</option>
                 ';
+    } else {
+        echo '
+                <option value="1">Admin</option>
+                <option value="3" selected>Staff</option>
+                ';
     }
-
     echo '</select>
     </div>
     ';

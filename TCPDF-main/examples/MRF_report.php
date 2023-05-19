@@ -108,7 +108,7 @@ $data_table = '';
 $get_data = $mrf_print->get_base_data();
 while ($row2 = $get_data->fetch(PDO::FETCH_ASSOC)) {
     $id = $row2['id'];
-    $date_added = $row2['date_added'];
+    $date_added = date('F j, Y', strtotime($row2['date_added']));
     $project = $row2['project'];
     $typeof_project = $row2['typeof_project'];
     $classification = $row2['classification'];
@@ -206,14 +206,9 @@ $html = <<<EOD
 <html>
 <head>
 <style>
-span{
-    text-decoration:underline;
-}
 .td{
     border: 1px solid black;
 }
-div span{
-    vertical-align:middle;
 </style>
 </head>
 <body>
@@ -291,14 +286,9 @@ $html2 = <<<EOD
 <html>
 <head>
 <style>
-span{
-    text-decoration:underline;
-}
 .td{
     border: 1px solid black;
 }
-div span{
-    vertical-align:middle;
 </style>
 </head>
 <body>

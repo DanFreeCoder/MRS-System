@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>MRF System</title>
+    <title>MRS System</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/img/innoland.png" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -16,6 +16,18 @@
     <link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            font-weight: 500;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body style="background-color: #f1f1f3;">
@@ -27,11 +39,13 @@
         <div id="page-content-wrapper">
             <!-- Top navigation-->
             <?php include 'includes/navigation.php'; ?>
+
             <div class="container" style="margin-top: 100px;">
-                <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px #888888;">
+                <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
                     <center>
-                        <h3 class="mb-5">Material Requisition Form</h3>
+                        <h3 class="mb-5">Material Requisition Slip</h3>
                     </center>
+                    <br>
                     <div class="row">
                         <div class="col-4 mb-2">
                             <div class="label">Project <span style="color:red;">*</span></div>
@@ -100,15 +114,15 @@
             </div>
 
             <!-- sub main -->
-            <div class="container-fluid mb-5" style="box-shadow: 5px 5px #888888;">
-                <div class="sub-main mt-5 p-3 mb-5" style="background-color:#f9f9fb; border-radius:5px;">
+            <div class="container-fluid mb-5">
+                <div class="sub-main mt-5 p-3 mb-5" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
                     <div class="row">
                         <center class="mb-3">
                             <h3>Item Descriptions</h3>
                         </center>
                         <form action="" method="post">
+                            <br> <br>
                             <div class="table-responsive">
-                                <div class="btn btn-info btn-sm mb-2 p-1" id="clear">Clear</div>
                                 <table class="table table-bordered bg-white table-hover">
                                     <thead>
                                         <th style="width: 1rem;">
@@ -130,7 +144,7 @@
                                     </thead>
                                     <tbody>
                                         <tr id="row">
-                                            <td contenteditable class="editable-cell qty" required></td>
+                                            <td contenteditable class="editable-cell qty"></td>
                                             <td contenteditable class="editable-cell oum"></td>
                                             <td contenteditable class="editable-cell code"></td>
                                             <td contenteditable class="editable-cell desc"></td>
@@ -170,8 +184,10 @@
                         </form>
                     </div>
                 </div>
-                <button class="btn btn-sm mt-5" type="submit" id="generate" name="generate" style="background-color: #00b5a9">Generate</button>
-                <button class="btn btn-sm btn-primary mt-5 draft">Save as Draft</button>
+                <br>
+                <a class="p-2 w-15 border-0 bg-success text-light" id="generate" name="generate" style=" border:none;"><b><i class="bi bi-check-lg text-light"></i> Generate</b></a>
+                <a class="p-2 w-15 mt-5 draft bg-secondary text-light" style="border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Save as Draft</b></a>
+                <a class="p-2 w-15 text-light bg-success mb-3 p-2 w-25" id="clear"><b><i class="bi bi-eraser"></i> Clear</b></a>
             </div>
 
         </div>

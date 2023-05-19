@@ -58,6 +58,32 @@
     $('#cip_type_table').dataTable();
     $('#pro_code_table').dataTable();
 
+
+    //Update User
+    $(document).on('click', '#btn_user', function () {
+        var upd_id = $('.upd-id').val();
+        var upd_fname = $('#upd-firstname').val();
+        var upd_lname = $('#upd-lastname').val();
+        var upd_email = $('#upd-email').val();
+        var upd_user_type = $('#upd-account_user_type').val();
+
+        // alert(upd_id)
+        var myData = 'id=' + upd_id + '&fname=' + upd_fname + '&lname=' + upd_lname + '&email=' + upd_email + '&user_type=' + upd_user_type;
+
+        $.ajax({
+            type: 'POST',
+            url: '../controls/update_user.php',
+            data: myData,
+
+            success: function (response) {
+                if (response > 0) {
+                    toastr["success"](`User's successfully Update.`);
+                }
+
+            }
+        })
+    })
+
     $('.detail').on('click', function () {
 
         var id = $(this).attr('value');

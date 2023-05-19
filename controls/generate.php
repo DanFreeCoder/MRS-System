@@ -71,7 +71,7 @@ if ($ex) {
         $pro_id = $row['id'];
     }
 
-    $pro_num = str_pad($pro_id, 5, "0", STR_PAD_LEFT);
+    $pro_num = str_pad($pro_id, 5, 0, STR_PAD_LEFT);
 
 
     $generate->date_added = date('Y-m-d');
