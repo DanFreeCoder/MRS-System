@@ -3,13 +3,13 @@ $(document).ready(function () {
     var uname = location.search.split('uname=')[1] // get the GET value 
     $('#username').val(uname);
 
-    $('#ok').on('click', () => {
+    $('#ok').on('click', function () {
         window.location = "home.php";
     })
 
 
     //login
-    $('#login').on('click', (e) => {
+    $('#login').on('click', function (e) {
         e.preventDefault();
         var username = $('#username').val();
         var password = $('#password').val();
@@ -26,7 +26,7 @@ $(document).ready(function () {
                         $('.modal').modal('show');
                         // window.location = "home.php";
                     } else {
-                        toastr.error(`ERROR! Login Failed. Please get in touch with the system administrator at local number 124.`).css("background-color", "#ff5e57");
+                        toastr.error(`Invalid username or password`).css("background-color", "#ff5e57");
                     }
                 }
             })

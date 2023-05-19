@@ -147,7 +147,7 @@ $('#blank').on('click', () => {
 
 
 
-$('#project_type').on('change', () => {
+$('#project_type').on('change', function () {
     var selectedVal = $(this).val();
 
     $.ajax({

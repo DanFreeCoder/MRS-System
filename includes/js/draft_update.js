@@ -5,14 +5,14 @@ $(document).ready(function () {
             location.reload();
         }, duration)
     }
-    $('#admin_side').on('click', () => {
+    $('#admin_side').on('click', function () {
         window.location = "adminpage/dashboard.php?click=" + 'man';
     })
 
-    $('#logout').on('click', () => {
+    $('#logout').on('click', function () {
         $('#log_out').modal('show');
     });
-    $('#out').on('click', () => {
+    $('#out').on('click', function () {
         window.location = "../mrf/controls/logout.php";
     });
 
@@ -22,7 +22,7 @@ $(document).ready(function () {
         $('#settingmodal').modal('show');
     });
 
-    $('#clear').on('click', () => {
+    $('#clear').on('click', function () {
         $('.editable-cell').text('');
     })
     //modal update user settings
@@ -262,7 +262,7 @@ $(document).ready(function () {
 
 }); //end of document
 //save to print
-$('.generate').on('click', () => {
+$('.generate').on('click', function () {
     var id = $('#id').val();
     var project = $('#project').val();
     var project_type = $('#project_type').val();
@@ -461,7 +461,7 @@ $('.generate').on('click', () => {
                 }
         }
 
-        exe_generate = () => {
+        exe_generate = function () {
             $.ajax({
                 type: 'POST',
                 url: 'controls/generate.php',

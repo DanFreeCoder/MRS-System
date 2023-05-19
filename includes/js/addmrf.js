@@ -1,22 +1,22 @@
 $(document).ready(function () {
 
-    $('#admin_side').on('click', () => {
+    $('#admin_side').on('click', function () {
         window.location = "adminpage/dashboard.php?click=" + 'man';
     })
 
-    $('#logout').on('click', () => {
+    $('#logout').on('click', function () {
         $('#log_out').modal('show');
     });
-    $('#out').on('click', () => {
+    $('#out').on('click', function () {
         window.location = "../mrf/controls/logout.php";
     });
     // user settings
-    $('#settings').on('click', (e) => {
+    $('#settings').on('click', function (e) {
         e.preventDefault();
         $('#settingmodal').modal('show');
     });
 
-    $('#clear').on('click', () => {
+    $('#clear').on('click', function () {
         $('.editable-cell').text('');
     })
     //modal update user settings
@@ -54,9 +54,7 @@ $(document).ready(function () {
 
     $('.select2').select2();
 
-    $('#generate').on('click', () => {
-
-
+    $('#generate').on('click', function () {
         var project = $('#project').val();
         var project_type = $('#project_type').val();
         var classification = $('#classification').val();
@@ -279,7 +277,7 @@ $(document).ready(function () {
     }
     //add row
     var count = 1;
-    $('#addrow').on('click', () => {
+    $('#addrow').on('click', function () {
         count = count + 1;
         var html = `<tr id="row${count}">`;
         html += `
@@ -296,13 +294,13 @@ $(document).ready(function () {
 
     });
     //remove row
-    $(document).on('click', '.remove', () => {
+    $(document).on('click', '.remove', function () {
         var delete_row = $(this).data('row');
         $('#' + delete_row).remove();
     })
 
     //save as draft
-    $(document).on('click', '.draft', () => {
+    $(document).on('click', '.draft', function () {
         var project = $('#project').val();
         var project_type = $('#project_type').val();
         var classification = $('#classification').val();
@@ -350,7 +348,7 @@ $(document).ready(function () {
 
     });
 
-    $('#project_type').on('change', () => {
+    $('#project_type').on('change', function () {
         var selectedVal = $(this).val();
 
         $.ajax({

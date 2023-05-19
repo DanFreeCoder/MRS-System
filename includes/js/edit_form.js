@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('.select2').select2();
 
-    $('#project_type').on('change', () => {
+    $('#project_type').on('change', function () {
         var selectedVal = $(this).val();
         $.ajax({
             type: 'POST',
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     //add row
     var count = 1;
-    $(document).on('click', '#addrow', () => {
+    $(document).on('click', '#addrow', function () {
         count = count + 1;
         var html = `<tr id="row${count}">`;
         html += `
@@ -37,12 +37,12 @@ $(document).ready(function () {
 
     });
 
-    $('#clear').on('click', () => {
+    $('#clear').on('click', function () {
         $('.editable-cell').text('');
     })
 
     //remove existing data from database
-    $('.remove').on('click', () => {
+    $('.remove').on('click', function () {
         var drafted_id = $(this).attr('value');
 
         $.ajax({
@@ -61,7 +61,7 @@ $(document).ready(function () {
         })
     });
 
-    $('#update').on('click', () => {
+    $('#update').on('click', function () {
         const id = $('#id').val();
         const user_id = $('#user_id').val();
         const project = $('#project option:selected').val();
