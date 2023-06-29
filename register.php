@@ -31,6 +31,17 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
@@ -46,7 +57,7 @@
                             <div class="d-flex justify-content-center py-3">
                                 <a href="login.php" class="logo d-flex align-items-center w-auto" style="text-decoration:none;">
                                     <img src="assets/img/innoland.png" alt="">
-                                    <h1 class="d-none d-lg-block" style="color:#00b6aa; font-weight:700;">MRS</h1>
+                                    <h1 class="d-none d-lg-block" style="color:#00b6aa; font-weight:700; font-family: 'Nunito', sans-serif;">MRS</h1>
                                 </a>
                             </div><!-- End Logo -->
 
@@ -69,10 +80,15 @@
                                             <input type="text" name="name" class="form-control" id="lname" required>
                                             <div class="invalid-feedback">Please, enter your name!</div>
                                         </div>
+                                        <div class="col-12">
+                                            <label for="yourName" class="form-label">Your Username</label>
+                                            <input type="text" name="name" class="form-control" id="uname" required readonly="true">
+                                            <div class="invalid-feedback">Please, enter your name!</div>
+                                        </div>
 
                                         <div class="col-12">
                                             <label for="yourEmail" class="form-label">Your Email</label>
-                                            <input type="email" name="email" class="form-control" id="email" required>
+                                            <input type="email" name="email" class="form-control" id="email" required placeholder="IGC Email">
                                             <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                                         </div>
 

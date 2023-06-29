@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>ADMINISTRATOR</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -53,7 +53,7 @@
             <?php include 'includes/navbar.php'; ?>
             <!-- Navbar End -->
 
-            <div class="container-fluid pt-4 px-4">
+            <div class="container-fluid pt-2">
                 <div class="bg-light rounded p-4">
                     <h6 class="mb-2">Manage Data</h6>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">

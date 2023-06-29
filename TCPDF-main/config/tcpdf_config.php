@@ -191,9 +191,6 @@ define('HEAD_MAGNIFICATION', 1.1);
  */
 define('K_CELL_HEIGHT_RATIO', 1.25);
 
-// Set the default scale to 100%
-define('PDF_UNIT_SCALE', 1);
-
 /**
  * Title magnification respect main font size.
  */

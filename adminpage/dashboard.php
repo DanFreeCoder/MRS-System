@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>ADMINISTRATOR</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -57,7 +57,7 @@
 
 
             <!-- Submitted form Start -->
-            <div class="container-fluid pt-4 px-4">
+            <div class="container-fluid pt-2">
                 <div class="bg-light rounded p-4">
                     <h6 class="mb-3">Submitted Form</h6>
                     <div class="btn-group mb-2 gap-1">
@@ -67,7 +67,7 @@
                         <div class="btn btn-danger btn-sm" id="remove">Remove Form</div>
                     </div>
                     <div class="table-responsive">
-                        <table id="sub_table" class="table text-start align-middle table-bordered table-hover mb-0">
+                        <table id="submitted_table" class="table text-start align-middle table-bordered table-hover mb-0 table-responsive" style="width: 100%;">
                             <thead>
                                 <tr class="text-dark">
                                     <th scope="col"><input type="checkbox" class="form-check-input" id="check_all"></th>
@@ -84,26 +84,26 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $form = $submitted->submitted_form();
-                                while ($row = $form->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '
-                                    <tr>
-                                    <td><input type="checkbox" name="form_sub" class="form-check-input" value="' . $row['id'] . '"></td>
-                                    <td>' . $row['date_added'] . '</td>
-                                    <td>' . $row['Project'] . '</td>
-                                    <td>' . $row['project_type'] . '</td>
-                                    <td>' . $row['classif'] . '</td>
-                                    <td>' . $row['sub_class'] . '</td>
-                                    <td>' . $row['cip_name'] . '</td>
-                                    <td>' . $row['con_num'] . '</td>
-                                    <td>' . $row['user'] . '</td>
-                                    <td>
-                                    <a href="../edit_form.php?user_id=' . $row['user_id'] . '&&' . 'id=' . $row['id'] . '" class="edit_form text-success" style="text-decoration:underline;" value="' . $row['id'] . '">Edit</a>
-                                    <a href="#" class="detail text-primary" style="text-decoration:underline;" value="' . $row['id'] . '">Detail</a>
-                                    </td>
-                                </tr>
-                                    ';
-                                }
+                                // $form = $submitted->all_submitted_form();
+                                // while ($row = $form->fetch(PDO::FETCH_ASSOC)) {
+                                //     echo '
+                                //     <tr>
+                                //     <td><input type="checkbox" name="form_sub" class="form-check-input" value="' . $row['id'] . '"></td>
+                                //     <td>' . $row['date_added'] . '</td>
+                                //     <td>' . $row['Project'] . '</td>
+                                //     <td>' . $row['project_type'] . '</td>
+                                //     <td>' . $row['classif'] . '</td>
+                                //     <td>' . $row['sub_class'] . '</td>
+                                //     <td>' . $row['cip_name'] . '</td>
+                                //     <td>' . $row['con_num'] . '</td>
+                                //     <td>' . $row['user'] . '</td>
+                                //     <td>
+                                //     <a href="../edit_form.php?user_id=' . $row['user_id'] . '&&' . 'id=' . $row['id'] . '" class="edit_form text-success" style="text-decoration:underline;" value="' . $row['id'] . '">Edit</a>
+                                //     <a href="#" class="detail text-primary" style="text-decoration:underline;" value="' . $row['id'] . '">Detail</a>
+                                //     </td>
+                                // </tr>
+                                //     ';
+                                // }
                                 ?>
                             </tbody>
                         </table>
@@ -126,7 +126,6 @@
                                         <th>Quantity</th>
                                         <th>OUM</th>
                                         <th>Item Code</th>
-                                        <th>Brand</th>
                                         <th>Description</th>
                                         <th>Remarks</th>
                                     </tr>

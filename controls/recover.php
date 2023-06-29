@@ -26,7 +26,7 @@ if ($view_by_email) {
     $from = "system.administrator<(it@innogroup.com.ph)>";
     $to = $_POST['email'];
 
-    $subject = "Material Requisition Form(MRF) User Message";
+    $subject = "Material Requisition Slip(MRS) User Message";
     $message = '<html>
                     <body style="margin: 0 auto; padding: 10px; border: 1px solid #e1e1e1; font-family:Calibri">
                         <div style="background-color: #00C957; padding: 5px; color: white">
@@ -34,14 +34,14 @@ if ($view_by_email) {
                         </div>
                         <div style="border: 1px solid #e1e1e1; padding: 5px">    
                             Hi ' . $firstname . ', <br><br>
-                            We received your request to change your password. As a response, you need to fill out this form through this link: <a href="http://www.innogroup.com.ph/mrf/change_password.php?id=' . $id . '">http://www.innogroup.com.ph/mrf/change_password.php</a><br><b>
+                            We received your request to change your password. As a response, you need to fill out this form through this link: <a href="http://www.innogroup.com.ph/mrs/change_password.php?id=' . $id . '">http://www.innogroup.com.ph/mrs/change_password.php</a><br><b>
                             Thank you. <br><br>
-                            Thank You, <br>MRF Administrator
+                            Thank You, <br>MRS Administrator
                         </div>
                         <br/>
                         <br/>
                         <div style="padding:10px 0px; text-align: center; font-size: 11px; border-top: 1px solid #e1e1e1">
-                        ONLINE MATERIAL REQUISITION FORM &middot; <a href="http://www.innogroup.com.ph/mrf">Innogroup</a>
+                        ONLINE MATERIAL REQUISITION SLIP &middot; <a href="http://www.innogroup.com.ph/mrs">Innogroup</a>
                         </div>
                     </body>
                 </html>';

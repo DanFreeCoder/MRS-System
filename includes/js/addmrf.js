@@ -1,4 +1,53 @@
 $(document).ready(function () {
+    $('.select2').select2();
+    //server-side select2
+    $('#findcode').select2({
+        placeholder: 'Search for data...',
+        minimumInputLength: 2,
+        ajax: {
+            url: 'controls/search_code.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+
+    $('#finddesc').select2({
+        placeholder: 'Search for data...',
+        minimumInputLength: 2,
+        ajax: {
+            url: 'controls/search_desc.php',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+
+
+    ItemDescGenerator();
+    ItemcodeGenerator();
+    //resctrict &
+    restrictSpecialChar();
+
+    $('#requestor').hide();
+    //requestor
+    $('#checkbox').on('click', function () {
+        if ($(this).is(':checked')) {
+            $('#requestor').show();
+        } else {
+            $('#requestor').hide();
+        }
+    })
 
     $('#admin_side').on('click', function () {
         window.location = "adminpage/dashboard.php?click=" + 'man';
@@ -8,7 +57,7 @@ $(document).ready(function () {
         $('#log_out').modal('show');
     });
     $('#out').on('click', function () {
-        window.location = "../mrf/controls/logout.php";
+        window.location = "../mrs/controls/logout.php";
     });
     // user settings
     $('#settings').on('click', function (e) {
@@ -22,23 +71,27 @@ $(document).ready(function () {
     //modal update user settings
     $('#save_upd').on('click', (e) => {
         e.preventDefault();
+        const fname = $('#upd-fname').val();
+        const lname = $('#upd-lname').val();
+        const uname = $('#upd-uname').val();
         const password = $('#password').val();
         const retype = $('#retype_password').val();
         const id = $('#upd-id').val();
-        const mydata = 'id=' + id + '&password=' + password;
+        const mydata = 'id=' + id + '&fname=' + fname + '&lname=' + lname + '&username=' + uname + '&password=' + password;
+
         if (password != '') {
             if (password == retype) {
                 $.ajax({
                     type: 'POST',
-                    url: 'controls/update-pass.php',
+                    url: 'controls/update-pass.php?module=with_password',
                     data: mydata,
                     success: function (response) {
                         if (response > 0) {
                             $('#settingmodal').modal('toggle')
-                            $('#user_current_pass').modal('show');
+                            $('#user_current_pass').modal('show')
                             setTimeout(function () {
-                                window.location = "../mrf/controls/logout.php";
-                            }, 5000);
+                                window.location = "../mrs/controls/logout.php";
+                            }, 6000);
                         }
                     }
                 })
@@ -46,21 +99,41 @@ $(document).ready(function () {
                 toastr.error(`password is not match`).css("background-color", "#ff5e57");
             }
         } else {
-            toastr.error(`All fields are required`).css("background-color", "#ff5e57");
+            //update user dettails only
+            $.ajax({
+                type: 'POST',
+                url: 'controls/update-pass.php?module=details_only',
+                data: mydata,
+                success: function (response) {
+                    if (response > 0) {
+                        $('#settingmodal').modal('toggle')
+                        $('#user_current_pass').modal('show')
+                        setTimeout(function () {
+                            window.location = "../mrs/controls/logout.php";
+                        }, 6000);
+                    }
+                }
+            })
         }
+    });
 
-    })
 
 
-    $('.select2').select2();
 
     $('#generate').on('click', function () {
+
         var project = $('#project').val();
         var project_type = $('#project_type').val();
         var classification = $('#classification').val();
         var sub_class = $('#sub_class').val();
         var cip_account = $('#cip_account').val();
         var approver = $('#approver').val();
+        var requestor = $('#requestor').val();
+
+        var checked = $('#checkbox').is(":checked");
+        if (!checked) {
+            requestor = '';
+        }
 
         var data = [];
 
@@ -99,6 +172,7 @@ $(document).ready(function () {
             remarks.push(remark)
         });
 
+
         //extract the qty value
         for (q of qtys) {
             var x = q;
@@ -127,6 +201,7 @@ $(document).ready(function () {
         for (r of remarks) {
             var re = r;
         }
+
         var r1_col1 = data[0][0];
         var r1_col2 = data[0][1];
         var r1_col3 = data[0][2];
@@ -148,8 +223,8 @@ $(document).ready(function () {
         var r5_col3 = data[4][2];
         var r5_col4 = data[4][3];
 
-        var mydata = 'project=' + project + '&project_type=' + project_type + '&classification=' + classification + '&sub_class=' + sub_class + '&cip_account=' + cip_account + '&approver=' + approver + '&data=' + JSON.stringify(data);
-
+        var mydata = 'project=' + project + '&project_type=' + project_type + '&classification=' + classification + '&sub_class=' + sub_class + '&cip_account=' + cip_account + '&approver=' + approver + '&requestor=' + requestor + '&data=' + JSON.stringify(data);
+        console.log(data)
         if (project != '' && project_type != '' && classification != '' && cip_account != '' && approver != '') {
             switch (true) {
                 case r1_col1.length == 0 || r1_col2.length == 0 || r1_col3.length == 0 || r1_col4.length == 0:
@@ -169,7 +244,7 @@ $(document).ready(function () {
                     toastr.error(`Descriptions is mandatory.`).css("background-color", "#ff5e57");
                     break;
                 //
-                case r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length != 0 && r2_col4.length != 0:
+                case r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length == 0 || r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length != 0 && r2_col4.length == 0 || r2_col1.length == 0 && r2_col2.length != 0 && r2_col3.length == 0 && r2_col4.length != 0 || r2_col1.length == 0 && r2_col2.length == 0 && r2_col3.length != 0 && r2_col4.length != 0 || r2_col1.length != 0 && r2_col2.length == 0 && r2_col3.length != 0 && r2_col4.length == 0:
                     toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
                     break;
                 //
@@ -188,7 +263,7 @@ $(document).ready(function () {
                     toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
                     break;
                 //
-                case r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length != 0 && r3_col4.length != 0:
+                case r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length == 0 || r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length != 0 && r3_col4.length == 0 || r3_col1.length == 0 && r3_col2.length != 0 && r3_col3.length == 0 && r3_col4.length != 0 || r3_col1.length == 0 && r3_col2.length == 0 && r3_col3.length != 0 && r3_col4.length != 0 || r3_col1.length != 0 && r3_col2.length == 0 && r3_col3.length != 0 && r3_col4.length == 0:
                     toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
                     break;
                 //
@@ -207,7 +282,7 @@ $(document).ready(function () {
                     toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
                     break;
                 //
-                case r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length != 0 && r4_col4.length != 0:
+                case r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length == 0 || r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length != 0 && r4_col4.length == 0 || r4_col1.length == 0 && r4_col2.length != 0 && r4_col3.length == 0 && r4_col4.length != 0 || r4_col1.length == 0 && r4_col2.length == 0 && r4_col3.length != 0 && r4_col4.length != 0 || r4_col1.length != 0 && r4_col2.length == 0 && r4_col3.length != 0 && r4_col4.length == 0:
                     toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
                     break;
                 //
@@ -226,7 +301,7 @@ $(document).ready(function () {
                     toastr.error('Descriptions is mandatory.').css("background-color", "#ff5e57");
                     break;
                 //
-                case r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length != 0 && r5_col4.length != 0:
+                case r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length == 0 || r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length != 0 && r5_col4.length == 0 || r5_col1.length == 0 && r5_col2.length != 0 && r5_col3.length == 0 && r5_col4.length != 0 || r5_col1.length == 0 && r5_col2.length == 0 && r5_col3.length != 0 && r5_col4.length != 0 || r5_col1.length != 0 && r5_col2.length == 0 && r5_col3.length != 0 && r5_col4.length == 0:
                     toastr.error(`Please complete the item descriptions.`).css("background-color", "#ff5e57");
                     break;
                 //
@@ -276,29 +351,46 @@ $(document).ready(function () {
         });
     }
     //add row
+
+    var num_row = 5;
     var count = 1;
+    $('#num_row').text(num_row)
     $('#addrow').on('click', function () {
-        count = count + 1;
-        var html = `<tr id="row${count}">`;
+        num_row = num_row += 1;
+        //count = count + 1;
+        var html = `<tr class="row_add" id="row${num_row}">`;
         html += `
-            <td contenteditable class="editable-cell qty"></td>
-            <td contenteditable class="editable-cell oum"></td>
-            <td contenteditable class="editable-cell code"></td>
-            <td contenteditable class="editable-cell desc"></td>
-            <td contenteditable class="editable-cell remark"></td>
-            <td style="width:2px; margin-right:0px;"><button class="remove btn-danger" id="remove" data-row="row${count}" style="border-radius:100%; border:none;"><i class="bi bi-x"></i></button></td>
+            <td contenteditable class="editable-cell qty" id="${num_row}"></td>
+            <td contenteditable class="editable-cell oum" id="${num_row}"></td>
+            <td contenteditable class="editable-cell code" id="${num_row}"></td>
+            <td contenteditable class="editable-cell desc" id="${num_row}"></td>
+            <td contenteditable class="editable-cell remark" id="${num_row}"></td>
+            <td style="width:2px; margin-right:0px;"><button class="remove btn-danger" id="remove" data-row="row${num_row}" style="border-radius:100%; border:none;"><i class="bi bi-x"></i></button></td>
             </tr>
             `;
         $('table tbody').append(html);
+        $('#num_row').text(num_row);
+        if (num_row == 20) {
+            $(this).css("background-color", "red");
+            $(this).attr('disabled', true);
+        } else {
+            $(this).attr('disabled', false);
+            $('#num_row').text(num_row);
+            $(this).css("background-color", "#5eb548");
+        }
+    })
 
-
-    });
     //remove row
     $(document).on('click', '.remove', function () {
         var delete_row = $(this).data('row');
         $('#' + delete_row).remove();
+        num_row = num_row -= 1;
+        $('#num_row').text(num_row);
+        if (num_row < 20) {
+            $('#addrow').css("background-color", "#5eb548");
+            $('#addrow').attr('disabled', false);
+        }
     })
-
     //save as draft
     $(document).on('click', '.draft', function () {
         var project = $('#project').val();
@@ -307,6 +399,12 @@ $(document).ready(function () {
         var sub_class = $('#sub_class').val();
         var cip_account = $('#cip_account').val();
         var approver = $('#approver').val();
+        var requestor = $('#requestor').val();
+
+        var checked = $('#checkbox').is(":checked");
+        if (!checked) {
+            requestor = '';
+        }
 
         var data = [];
 
@@ -318,7 +416,7 @@ $(document).ready(function () {
             data.push(row);
         });
 
-        var mydata = 'project=' + project + '&project_type=' + project_type + '&classification=' + classification + '&sub_class=' + sub_class + '&cip_account=' + cip_account + '&approver=' + approver + '&data=' + JSON.stringify(data);
+        var mydata = 'project=' + project + '&project_type=' + project_type + '&classification=' + classification + '&sub_class=' + sub_class + '&cip_account=' + cip_account + '&approver=' + approver + '&requestor=' + requestor + '&data=' + JSON.stringify(data);
         if (project != '' && project_type != '' && classification != '' && cip_account != '' && approver != '') {
             $.ajax({
                 type: 'POST',
@@ -366,9 +464,34 @@ $(document).ready(function () {
 
 
 
+    // < !--USERNAME AUTO GENERATE-- >
+
+    $(document).on('blur', '#upd-fname', function (e) {
+        e.preventDefault();
+
+        var str = $('#upd-fname').val();
+        var fname = str.replace(/\s/g, '');
+        var f = fname.toLowerCase();
+        var str1 = $('#upd-lname').val();
+        var lname = str1.replace(/\s/g, '');
+        var l = lname.toLowerCase();
+        var uname = f.concat('.').concat(l);
+        $('#upd-uname').val(uname);
+    });
+    $(document).on('blur', '#upd-lname', function (e) {
+        e.preventDefault();
+
+        var str = $('#upd-fname').val();
+        var fname = str.replace(/\s/g, '');
+        var f = fname.toLowerCase();
+        var str1 = $('#upd-lname').val();
+        var lname = str1.replace(/\s/g, '');
+        var l = lname.toLowerCase();
+        var uname = f.concat('.').concat(l);
+        $('#upd-uname').val(uname);
+    });
+
 });
-
-
 
 toastr.options = {
     "closeButton": true,
@@ -387,3 +510,4 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+

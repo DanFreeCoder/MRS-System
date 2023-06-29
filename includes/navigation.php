@@ -31,10 +31,18 @@ if (!isset($_SESSION['firstname'])) {
             <a href="home.php"><img src="./assets/img/innoland.png" alt="" style="height: 60px; margin-right:0px;"></a>
         </div>
         <a href="home.php" style="text-decoration:none;">
-            <h1 class="" style="font-weight: 700; color:#00b5a9;">MRS</h1>
+            <h1 class="" style="font-weight: 700; color:#00b5a9; font-family: 'Nunito', sans-serif;">MRS</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <span> &nbsp; &nbsp;</span>
+            <select name="" id="finddesc" class="select2  finddesc" style="width:30%;">
+                <option value="0" class="form-control">Enter Item Code</option>
+            </select>
+            <select name="" id="findcode" class="select2 findcode form-control" style="width: 70%;">
+                <option value="0" class="form-control">Enter Item Description</option>
+            </select>
+            <span> &nbsp; &nbsp;</span>
             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                 <li class="nav-item active"><a class="nav-link" href="home.php"><b>Dashboard</b></a></li>
                 <li class="nav-item dropdown">
@@ -62,29 +70,30 @@ if (!isset($_SESSION['firstname'])) {
 <div class="modal fade" id="settingmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color: #00aa9f;">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Account Settings</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
-                    <label>Name:</label>
+                    <label>First Name</label>
                     <div>
                         <input type="text" class="form-control" id="upd-id" value="<?php echo $_SESSION['id'] ?>" hidden>
-                        <input type="text" class="form-control" value="<?php echo $_SESSION['firstname'] . " " . $_SESSION['lastname'] ?>">
+                        <input type="text" class="form-control" id="upd-fname" value="<?php echo $_SESSION['firstname'] ?>">
                     </div>
-
-                    <label>Username:</label>
+                    <label>Last Name</label>
+                    <div><input type="text" class="form-control" id="upd-lname" value="<?php echo $_SESSION['lastname'] ?>"></div>
+                    <label>Username</label>
                     <div>
-                        <input type="text" class="form-control" value="<?php echo $_SESSION['username'] ?>">
+                        <input type="text" class="form-control" id="upd-uname" value="<?php echo $_SESSION['username'] ?>" readonly="true">
                     </div>
 
-                    <label>Password:</label>
+                    <label>Password</label>
                     <div>
                         <input type="password" id="password" class="form-control">
                     </div>
 
-                    <label>Re-type Password:</label>
+                    <label>Re-type Password</label>
                     <div>
                         <input type="password" id="retype_password" class="form-control">
                     </div>
@@ -109,7 +118,7 @@ if (!isset($_SESSION['firstname'])) {
                 <h5 class="modal-title" id="staticBackdropLabel">MRS</h5>
             </div>
             <div class="modal-body">
-                <center>Congratulation, your password has been successfully updated. You need to login again to complete the process <a style="color: red;" href="../mrf/controls/logout.php">Click here</a> to continue.</center>
+                <center>Congratulation, your password has been successfully updated. You need to login again to complete the process <a style="color: red;" href="../mrs/controls/logout.php">Click here</a> to continue.</center>
             </div>
         </div>
     </div>

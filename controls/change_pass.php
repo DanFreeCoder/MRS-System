@@ -9,7 +9,9 @@ $users = new Users($db);
 
 
 $users->password = md5($_POST['password']);
+$users->log = 1;
 $users->id = $_POST['id'];
+
 
 $upd_users = $users->change_password();
 

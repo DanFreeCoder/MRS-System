@@ -113,6 +113,7 @@ while ($row2 = $get_data->fetch(PDO::FETCH_ASSOC)) {
     $con_num = $row2['con_num'];
     $cip_account = $row2['cip_account'];
     $approver = $row2['approver'];
+    $requestor = $row2['requestor'];
 }
 
 //get project
@@ -232,12 +233,31 @@ $data_table .= '
             <td colspan="3" style="border:1px solid black; text-align:center;"></td>
             <td colspan="2" style="border:1px solid black; text-align:center;"></td>
         </tr>
+        <tr>
+            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
+            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
+        </tr>
         
     ';
 
 
 
-$fullname = $_SESSION['firstname'] . " " . $_SESSION['lastname'];
+$fullname = '';
+if ($requestor == '') {
+    $fullname = $_SESSION['firstname'] . " " . $_SESSION['lastname'];
+} else {
+    $fullname = $requestor;
+}
 
 $html = <<<EOD
 <!DOCTYPE html>

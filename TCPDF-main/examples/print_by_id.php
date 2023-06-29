@@ -119,6 +119,7 @@ while ($row2 = $get_data->fetch(PDO::FETCH_ASSOC)) {
     $con_num = $row2['con_num'];
     $cip_account = $row2['cip_account'];
     $approver = $row2['approver'];
+    $requestor = $row2['requestor'];
     $user_id = $row2['user_id'];
 }
 //get project
@@ -200,7 +201,12 @@ while ($row2 = $get_table->fetch(PDO::FETCH_ASSOC)) {
 
 
 
-$fullname = $_SESSION['firstname'] . " " . $_SESSION['lastname'] . " ";
+$fullname = '';
+if ($requestor == '') {
+    $fullname = $_SESSION['firstname'] . " " . $_SESSION['lastname'];
+} else {
+    $fullname = $requestor;
+}
 
 $html = <<<EOD
 <!DOCTYPE html>

@@ -144,13 +144,12 @@ define('PDF_MARGIN_BOTTOM', 5);
 /**
  * Left margin.
  */
-define('PDF_MARGIN_LEFT', 7);
+define('PDF_MARGIN_LEFT', 8);
 
 /**
  * Right margin.
  */
-define('PDF_MARGIN_RIGHT', 5);
-
+define('PDF_MARGIN_RIGHT', 8);
 
 /**
  * Default main font name.
@@ -161,10 +160,6 @@ define('PDF_FONT_NAME_MAIN', 'helvetica');
  * Default main font size.
  */
 define('PDF_FONT_SIZE_MAIN', 5);
-
-
-// Set the default scale to 100%
-define('PDF_UNIT_SCALE', 1);
 
 /**
  * Default data font name.

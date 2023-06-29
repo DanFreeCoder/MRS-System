@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
+    <link href="/" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -28,12 +28,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://nightly.datatables.net/css/jquery.dataTables.css">
 
+
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
@@ -46,9 +58,9 @@
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
                             <div class="d-flex justify-content-center py-3">
-                                <a href="login.php" class="logo d-flex align-items-center w-auto" style="text-decoration:none;">
+                                <a href="index.php" class="logo d-flex align-items-center w-auto" style="text-decoration:none;">
                                     <img src="assets/img/innoland.png" alt="">
-                                    <h1 class="d-none d-lg-block" style="color:#00b6aa; font-weight:700;">MRS</h1>
+                                    <h1 class="d-none d-lg-block" style="color:#00b6aa; font-weight:700; font-family: 'Nunito', sans-serif;">MRS</h1>
                                 </a>
                             </div><!-- End Logo -->
 
@@ -61,7 +73,7 @@
                                         <p class="text-center small">Enter your username & password to login</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3 needs-validation" id="loginform" novalidate>
 
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Username</label>
@@ -82,14 +94,15 @@
                                         <div class="col-12">
                                             <a href="email_request.php">Forgot Password?</a>
                                         </div>
+
                                         <div class="col-12">
-                                            <button class="btn w-100" id="login" style="background-color: #00b6aa; color:white;">Login</button>
+                                            <button type="submit" class="btn w-100 login" id="login" style="background-color: #00b6aa; color:white;">Login</button>
                                         </div>
                                         <div class="col-12">
                                             <p class="small mb-0">Don't have account? <a href="register.php">Create an account</a></p>
                                         </div>
-
                                     </form>
+
 
                                 </div>
                             </div>
@@ -134,8 +147,10 @@
     <!-- Bootstrap core JS-->
     <script src="dist/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/jqueryv3.6.4/jquery.min.js" type="text/javascript"></script>
+
     <script src="assets/toastr/toastr.min.js"></script>
     <script src="assets/select2/js/select2.min.js"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lfn5U4mAAAAAGlqhcoNylxg9Ct3fABximVjO1xo"></script>
     <script src="includes/js/index.js"></script>
 </body>
 

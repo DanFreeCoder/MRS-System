@@ -6,7 +6,7 @@
         <input class="form-control border-0" type="search" placeholder="Search">
     </form>
     <div class="navbar-nav align-items-center ms-auto">
-        <a href="../../mrf/home.php" class="nav-link">Home</a>
+        <a href="../../mrs/home.php" class="nav-link">Home</a>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <i class="bi bi-person-circle" style="width: 40px; height:40px;"></i>

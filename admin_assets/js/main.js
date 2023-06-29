@@ -1,5 +1,24 @@
 (function ($) {
     "use strict";
+
+    $('#submitted_table').dataTable({
+        'serverSide': 'true',
+        'processing': 'true',
+        'paging': 'true',
+        'order': [],
+        'ajax': {
+            'url': '../controls/all_submitted_form.php',
+            'type': 'post',
+        },
+        "aoColumnDefs": [{
+            "bSortable": 'true',
+            "aTargets": [9]
+        },],
+        aoColumnDefs: [{
+            bSortable: false,
+            aTargets: [0, 9]
+        }]
+    });
     function reload() {
         setTimeout(function () {
             location.reload();
@@ -24,22 +43,29 @@
     //     window.location = "../mrf/controls/logout.php";
     // });
     //modal update user settings
-    $('#save_upd').on('click', function (e) {
+    $('#save_upd').on('click', (e) => {
         e.preventDefault();
+        const fname = $('#upd-fname').val();
+        const lname = $('#upd-lname').val();
+        const uname = $('#upd-uname').val();
         const password = $('#password').val();
         const retype = $('#retype_password').val();
         const id = $('#upd-id').val();
-        const mydata = 'id=' + id + '&password=' + password;
+        const mydata = 'id=' + id + '&fname=' + fname + '&lname=' + lname + '&username=' + uname + '&password=' + password;
+
         if (password != '') {
             if (password == retype) {
                 $.ajax({
                     type: 'POST',
-                    url: '../controls/update-pass.php',
+                    url: '../controls/update-pass.php?module=with_password',
                     data: mydata,
                     success: function (response) {
                         if (response > 0) {
                             $('#settingmodal').modal('toggle')
                             $('#user_current_pass').modal('show')
+                            setTimeout(function () {
+                                window.location = "../controls/logout.php";
+                            }, 6000);
                         }
                     }
                 })
@@ -47,11 +73,25 @@
                 toastr.error(`password is not match`).css("background-color", "#ff5e57");
             }
         } else {
-            toastr.error(`All fields are required`).css("background-color", "#ff5e57");
+            //update user dettails only
+            $.ajax({
+                type: 'POST',
+                url: '../controls/update-pass.php?module=details_only',
+                data: mydata,
+                success: function (response) {
+                    if (response > 0) {
+                        $('#settingmodal').modal('toggle')
+                        $('#user_current_pass').modal('show')
+                        setTimeout(function () {
+                            window.location = "../controls/logout.php";
+                        }, 6000);
+                    }
+                }
+            })
         }
-    })
+    });
 
-    $('#sub_table').dataTable();
+    $('#user_table').dataTable();
     $('#project_table').dataTable();
     $('#project_type_table').dataTable();
     $('#classification_table').dataTable();
@@ -84,7 +124,7 @@
         })
     })
 
-    $('.detail').on('click', function () {
+    $(document).on('click', '.detail', function () {
 
         var id = $(this).attr('value');
 
@@ -802,6 +842,33 @@
         return false;
     });
 
+
+    // < !--USERNAME AUTO GENERATE-- >
+
+    $(document).on('blur', '#upd-fname', function (e) {
+        e.preventDefault();
+
+        var str = $('#upd-fname').val();
+        var fname = str.replace(/\s/g, '');
+        var f = fname.toLowerCase();
+        var str1 = $('#upd-lname').val();
+        var lname = str1.replace(/\s/g, '');
+        var l = lname.toLowerCase();
+        var uname = f.concat('.').concat(l);
+        $('#upd-uname').val(uname);
+    });
+    $(document).on('blur', '#upd-lname', function (e) {
+        e.preventDefault();
+
+        var str = $('#upd-fname').val();
+        var fname = str.replace(/\s/g, '');
+        var f = fname.toLowerCase();
+        var str1 = $('#upd-lname').val();
+        var lname = str1.replace(/\s/g, '');
+        var l = lname.toLowerCase();
+        var uname = f.concat('.').concat(l);
+        $('#upd-uname').val(uname);
+    });
 
 })(jQuery);
 

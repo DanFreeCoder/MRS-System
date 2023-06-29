@@ -6,14 +6,15 @@ $(document).ready(function () {
         e.preventDefault();
         var myStr = $('#email').val();
         var last = myStr.substring(myStr.lastIndexOf("@") + 1);
-        if (last === 'innogroup.com.ph') {
+        if (last === 'innogroup.com.ph' || last === 'induco.com.ph' || last === 'citrineland.com.ph' || last === 'innoland.com.ph' || last === 'innoprime.com.ph') {
 
             var fname = $('#fname').val();
             var lname = $('#lname').val();
+            var username = $('#uname').val();
             var email = $('#email').val();
             // var uname = $('#uname').val();
 
-            var mydata = 'fname=' + fname + '&lname=' + lname + '&email=' + email;
+            var mydata = 'fname=' + fname + '&lname=' + lname + '&username=' + username + '&email=' + email;
             if (fname != '' && lname != '' && email != '') {
                 $.ajax({
                     type: 'POST',
@@ -56,30 +57,30 @@ $('#ok').on('click', function () {
 
 // < !--USERNAME AUTO GENERATE-- >
 
-// $('#fname').blur(function (e) {
-//     e.preventDefault();
+$('#fname').blur(function (e) {
+    e.preventDefault();
 
-//     var str = $('#fname').val();
-//     var fname = str.replace(/\s/g, '');
-//     var f = fname.toLowerCase();
-//     var str1 = $('#lname').val();
-//     var lname = str1.replace(/\s/g, '');
-//     var l = lname.toLowerCase();
-//     var uname = f.concat('.').concat(l);
-//     $('#uname').val(uname);
-// })
-// $('#lname').blur(function (e) {
-//     e.preventDefault();
+    var str = $('#fname').val();
+    var fname = str.replace(/\s/g, '');
+    var f = fname.toLowerCase();
+    var str1 = $('#lname').val();
+    var lname = str1.replace(/\s/g, '');
+    var l = lname.toLowerCase();
+    var uname = f.concat('.').concat(l);
+    $('#uname').val(uname);
+})
+$('#lname').blur(function (e) {
+    e.preventDefault();
 
-//     var str = $('#fname').val();
-//     var fname = str.replace(/\s/g, '');
-//     var f = fname.toLowerCase();
-//     var str1 = $('#lname').val();
-//     var lname = str1.replace(/\s/g, '');
-//     var l = lname.toLowerCase();
-//     var uname = f.concat('.').concat(l);
-//     $('#uname').val(uname);
-// })
+    var str = $('#fname').val();
+    var fname = str.replace(/\s/g, '');
+    var f = fname.toLowerCase();
+    var str1 = $('#lname').val();
+    var lname = str1.replace(/\s/g, '');
+    var l = lname.toLowerCase();
+    var uname = f.concat('.').concat(l);
+    $('#uname').val(uname);
+})
 
 
 toastr.options = {

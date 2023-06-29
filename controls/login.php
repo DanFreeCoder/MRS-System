@@ -21,6 +21,7 @@ if ($row = $login->fetch(PDO::FETCH_ASSOC)) {
     $_SESSION['account_type'] = $row['account_type'];
     $_SESSION['username'] = $row['username'];
     $_SESSION['id'] = $row['id'];
+    $_SESSION['log'] = $row['log'];
     echo 1;
 } else {
     echo 0;

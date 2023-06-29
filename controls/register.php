@@ -7,13 +7,13 @@ $db = $database->connect();
 
 $users = new Users($db);
 
-$username = strtolower($_POST['fname'] . "." . $_POST['lname']);
 $users->firstname = $_POST['fname'];
 $users->lastname = $_POST['lname'];
 $users->email = $_POST['email'];
-$users->username = str_replace(" ", ".", $username);
+$users->username = $_POST['username'];
 $users->password = md5('123456');
 $users->account_type = 3;
+$users->log = 0;
 $users->status = 1;
 
 $register = $users->register();

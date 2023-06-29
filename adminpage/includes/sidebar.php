@@ -54,23 +54,24 @@ if (!isset($_SESSION['firstname'])) {
             </div>
             <div class="modal-body">
                 <form>
-                    <label>Name:</label>
+                    <label>First Name</label>
                     <div>
                         <input type="text" class="form-control" id="upd-id" value="<?php echo $_SESSION['id'] ?>" hidden>
-                        <input type="text" class="form-control" value="<?php echo $_SESSION['firstname'] . " " . $_SESSION['lastname'] ?>">
+                        <input type="text" class="form-control" id="upd-fname" value="<?php echo $_SESSION['firstname'] ?>">
                     </div>
-
-                    <label>Username:</label>
+                    <label>Last Name</label>
+                    <div><input type="text" class="form-control" id="upd-lname" value="<?php echo $_SESSION['lastname'] ?>"></div>
+                    <label>Username</label>
                     <div>
-                        <input type="text" class="form-control" value="<?php echo $_SESSION['username'] ?>">
+                        <input type="text" class="form-control" id="upd-uname" value="<?php echo $_SESSION['username'] ?>" readonly="true">
                     </div>
 
-                    <label>Password:</label>
+                    <label>Password</label>
                     <div>
                         <input type="password" id="password" class="form-control">
                     </div>
 
-                    <label>Re-type Password:</label>
+                    <label>Re-type Password</label>
                     <div>
                         <input type="password" id="retype_password" class="form-control">
                     </div>
@@ -93,13 +94,9 @@ if (!isset($_SESSION['firstname'])) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <center>Congratulation, your password has been successfully updated. You need to login again to complete the process <a style="color: red;" href="../controls/logout.php">Click here</a> to continue.</center>
-            </div>
-            <div class="modal-footer">
-                <a href="../controls/logout.php"><button type="button" class="btn btn-danger">LOGOUT</button></a>
             </div>
         </div>
     </div>

@@ -8,9 +8,9 @@ class admin_side
         $this->con = $db;
     }
 
-    public function submitted_form()
+    public function all_submitted_form($sql)
     {
-        $sql = "SELECT generateddata.id, generateddata.date_added, generateddata.user_id, projects.Project, type_of_project.project_type, CONCAT(class_of_item.class_item_id, '-', class_of_item.items) as classif, generateddata.sub_class, cip_type.cip_account as cip_name, generateddata.con_num, CONCAT(users.firstname, ' ', users.lastname)as user FROM generateddata, projects, type_of_project, class_of_item, cip_type, users WHERE generateddata.project = projects.id AND generateddata.typeof_project = type_of_project.id AND generateddata.classification = class_of_item.class_item_id  AND generateddata.cip_account = cip_type.id AND generateddata.user_id = users.id AND generateddata.status != 4 AND generateddata.status != 2 AND generateddata.status != 0 ORDER BY generateddata.id DESC";
+
         $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $select = $this->con->prepare($sql);
 

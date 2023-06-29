@@ -36,6 +36,7 @@ $generate->sub_class = $_POST['sub_class'];
 $generate->con_num =  $pro_code_name . '-' . $year . '-' . $pro_num; //'PRO-23-00001';
 $generate->cip_account = $_POST['cip_account'];
 $generate->approver = $_POST['approver'];
+$generate->requestor = $_POST['requestor'];
 $generate->user_id = $_SESSION['id'];
 $generate->status = 1;
 $save = $generate->gen_after_upd();
@@ -78,6 +79,7 @@ if ($ex) {
     $update->sub_class = $_POST['sub_class'];
     $update->cip_account = $_POST['cip_account'];
     $update->approver = $_POST['approver'];
+    $update->requestor = $_POST['requestor'];
     $update->id = $_POST['id'];
     $update->status = 1;
     $update->user_id = $_SESSION['id'];

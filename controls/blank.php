@@ -35,6 +35,7 @@ $generate->sub_class = $_POST['sub_class'];
 $generate->con_num = $pro_code_name . '-' . $year . '-' . $pro_num; //'PRO-23-00001';
 $generate->cip_account = $_POST['cip_account'];
 $generate->approver = $_POST['approver'];
+$generate->requestor = $_POST['requestor'];
 $generate->user_id = $_SESSION['id'];
 $generate->status = 2;
 $insert = $generate->generate();

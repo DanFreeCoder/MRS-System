@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
     var uname = location.search.split('uname=')[1] // get the GET value 
@@ -13,23 +14,29 @@ $(document).ready(function () {
         e.preventDefault();
         var username = $('#username').val();
         var password = $('#password').val();
-
         var mydata = 'username=' + username + '&password=' + password;
         if (username != '' && password != '') {
-            $.ajax({
-                type: 'POST',
-                url: 'controls/login.php',
-                data: mydata,
+            grecaptcha.enterprise.ready(function () {
+                grecaptcha.enterprise.execute('6Lfn5U4mAAAAAGlqhcoNylxg9Ct3fABximVjO1xo', {
+                    action: 'loginform'
+                }).then(function (token) {
 
-                success: function (response) {
-                    if (response > 0) {
-                        $('.modal').modal('show');
-                        // window.location = "home.php";
-                    } else {
-                        toastr.error(`Invalid username or password`).css("background-color", "#ff5e57");
-                    }
-                }
-            })
+                    $.ajax({
+                        type: 'POST',
+                        url: 'controls/login.php',
+                        data: mydata,
+
+                        success: function (response) {
+                            if (response > 0) {
+                                window.location = "home.php";
+                            } else {
+                                toastr.error(`Invalid username or password`).css("background-color", "#ff5e57");
+                            }
+                        }
+                    })
+
+                });
+            });
         } else {
             toastr.error(`All fields are required`).css("background-color", "#ff5e57");
         }

@@ -88,7 +88,7 @@ class clsType
 
     public function generate()
     {
-        $sql = "INSERT INTO generatedData SET date_added=?, project=?, typeof_project=?, classification=?, sub_class=?, con_num=?, cip_account=?, approver=?, user_id=?, status = ?";
+        $sql = "INSERT INTO generatedData SET date_added=?, project=?, typeof_project=?, classification=?, sub_class=?, con_num=?, cip_account=?, approver=?, requestor =?, user_id=?, status = ?";
         $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $ins = $this->con->prepare($sql);
 
@@ -100,8 +100,9 @@ class clsType
         $ins->bindParam(6, $this->con_num);
         $ins->bindParam(7, $this->cip_account);
         $ins->bindParam(8, $this->approver);
-        $ins->bindParam(9, $this->user_id);
-        $ins->bindParam(10, $this->status);
+        $ins->bindParam(9, $this->requestor);
+        $ins->bindParam(10, $this->user_id);
+        $ins->bindParam(11, $this->status);
 
         if ($ins->execute()) {
             return true;
@@ -186,7 +187,7 @@ class clsType
 
     public function save_as_draft()
     {
-        $sql = "INSERT INTO save_as_draft SET date_added=?, project=?, typeof_project=?, classification=?, sub_class=?, cip_account=?, approver=?, user_id=?, status=?";
+        $sql = "INSERT INTO save_as_draft SET date_added=?, project=?, typeof_project=?, classification=?, sub_class=?, cip_account=?, approver=?, requestor=?, user_id=?, status=?";
         $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $ins = $this->con->prepare($sql);
 
@@ -197,8 +198,9 @@ class clsType
         $ins->bindParam(5, $this->sub_class);
         $ins->bindParam(6, $this->cip_account);
         $ins->bindParam(7, $this->approver);
-        $ins->bindParam(8, $this->user_id);
-        $ins->bindParam(9, $this->status);
+        $ins->bindParam(8, $this->requestor);
+        $ins->bindParam(9, $this->user_id);
+        $ins->bindParam(10, $this->status);
 
         if ($ins->execute()) {
             return true;
@@ -232,7 +234,7 @@ class clsType
     }
     public function update()
     {
-        $sql = "UPDATE save_as_draft SET date_added =?, project=?, typeof_project=?, classification=?, sub_class=?, cip_account=?, approver=?, status=? WHERE id = ? AND user_id=?";
+        $sql = "UPDATE save_as_draft SET date_added =?, project=?, typeof_project=?, classification=?, sub_class=?, cip_account=?, approver=?, requestor=?, status=? WHERE id = ? AND user_id=?";
         $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $upd = $this->con->prepare($sql);
 
@@ -243,9 +245,10 @@ class clsType
         $upd->bindParam(5, $this->sub_class);
         $upd->bindParam(6, $this->cip_account);
         $upd->bindParam(7, $this->approver);
-        $upd->bindParam(8, $this->status);
-        $upd->bindParam(9, $this->id);
-        $upd->bindParam(10, $this->user_id);
+        $upd->bindParam(8, $this->requestor);
+        $upd->bindParam(9, $this->status);
+        $upd->bindParam(10, $this->id);
+        $upd->bindParam(11, $this->user_id);
 
         if ($upd->execute()) {
             return true;
@@ -329,7 +332,7 @@ class clsType
 
     public function gen_after_upd() //generate after update without adding new row
     {
-        $sql = "INSERT INTO generatedData SET date_added=?, project=?, typeof_project=?, classification=?, sub_class=?, con_num=?, cip_account=?, approver=?, user_id=?, status = ?";
+        $sql = "INSERT INTO generateddata SET date_added=?, project=?, typeof_project=?, classification=?, sub_class=?, con_num=?, cip_account=?, approver=?, requestor=?, user_id=?, status = ?";
         $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $ins = $this->con->prepare($sql);
 
@@ -341,8 +344,9 @@ class clsType
         $ins->bindParam(6, $this->con_num);
         $ins->bindParam(7, $this->cip_account);
         $ins->bindParam(8, $this->approver);
-        $ins->bindParam(9, $this->user_id);
-        $ins->bindParam(10, $this->status);
+        $ins->bindParam(9, $this->requestor);
+        $ins->bindParam(10, $this->user_id);
+        $ins->bindParam(11, $this->status);
 
         if ($ins->execute()) {
             return true;
@@ -373,5 +377,24 @@ class clsType
         } else {
             return false;
         }
+    }
+
+
+    public function submitted_form($sql)
+    {
+        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $view = $this->con->prepare($sql);
+
+        $view->execute();
+        return $view;
+    }
+
+    public function draft_form($query)
+    {
+        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $view = $this->con->prepare($query);
+
+        $view->execute();
+        return $view;
     }
 }

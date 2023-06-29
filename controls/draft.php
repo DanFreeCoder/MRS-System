@@ -24,6 +24,7 @@ $draft->classification = $_POST['classification'];
 $draft->sub_class = $_POST['sub_class'];
 $draft->cip_account = $_POST['cip_account'];
 $draft->approver = $_POST['approver'];
+$draft->requestor = $_POST['requestor'];
 $draft->user_id = $_SESSION['id'];
 $draft->status = 4;
 $insert = $draft->save_as_draft();

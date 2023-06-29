@@ -17,10 +17,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Nunito', sans-serif;
             box-sizing: border-box;
-            font-weight: 500;
+        }
+
+        @keyframes spinner-grow {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: none;
+            }
         }
 
         a {
@@ -53,6 +67,7 @@
                     $sub_class1 = $rows['sub_class'];
                     $approver1 = $rows['approver'];
                     $cipname1 = $rows['cip_account'];
+                    $requestor = $rows['requestor'];
                 }
                 ?>
                 <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
@@ -78,7 +93,7 @@
                             </select>
                         </div>
                         <div class="col-4 mb-2">
-                            <div class="label mb-1">Type of Project <span style="color:red;">*</span></div>
+                            <div class="label">Type of Project <span style="color:red;">*</span></div>
                             <select type="text" id="project_type" class="select2 form-control js-example-basic-single" style="width: 100%">
                                 <?php
 
@@ -119,7 +134,7 @@
                         </div>
                         <div class="col-4 mb-2">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
-                            <div class="label">Sub-Classification <span style="color:red;">*</span></div>
+                            <div class="label">Sub-Classification</div>
                             <input type="text" class="form-control text-secondary" value="<?php echo $sub_class1; ?>" id="sub_class" placeholder="Enter  Sub-Classification">
                             <input type="text" id="id" value="<?php echo $id; ?>" hidden>
                         </div>
@@ -141,6 +156,12 @@
                             <div class="label">Approver <span style="color:red;">*</span></div>
                             <input type="text" class="form-control text-secondary" id="approver" value="<?php echo $approver1 ?>" placeholder="Enter Approver">
                         </div>
+                        <div class="col-6 mb-2">
+                            <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
+                            <input type="checkbox" name="" id="checkbox" style="width: 30px; height:15px;">
+                            <span class="fw-lighter text-body-secondary">Check if requested by the Foreman/Leadman</span>
+                            <input type="text" class="form-control text-secondary" id="requestor" value="<?php echo $requestor ?>" placeholder="Requestor's Name" style="width: 50%;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,27 +175,28 @@
                         </center>
                         <form action="" method="post">
                             <div class="table-responsive">
-                                <button type="button" id="addrow" style="border-radius:100%; background-color:#5eb548; color:white; border:none;"><i class="bi bi-plus"></i></button>
+                                <button type="button" id="addrow" style="background-color:#5eb548; color:white; border:none; margin-bottom:5px;">Add Row</button>
                                 <table class="table table-bordered bg-white table-hover">
                                     <thead>
                                         <th style="width: 1rem;" hidden>
                                             #
                                         </th>
                                         <th style="width: 1rem;">
-                                            Quantity
+                                            Quantity <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 5rem;">
-                                            UOM
+                                            UOM <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 7rem;">
-                                            Item Code
+                                            Item Code <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 14rem;">
-                                            Description
+                                            Description <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 8rem;">
                                             Remarks
                                         </th>
+                                        <th id="action" hidden>Action</th>
                                         <!-- <th style="width: 5px;"><i class="bi bi-arrows-move"></i></th> -->
                                     </thead>
                                     <tbody>
@@ -182,31 +204,39 @@
                                         $view_description_draft->id = $_GET['id'];
                                         $get_desc = $view_description_draft->view_draft_item_descriptions();
                                         while ($view_desc = $get_desc->fetch(PDO::FETCH_ASSOC)) {
+                                            $rem = '<td style="width:2px; margin-right:0px;" class="drafted_id" "value="' . $view_desc['id'] . '"><a><i class="btn btn-danger btn-sm rounded-5 btn-sm bi bi-x remove" value="' . $view_desc['id'] . '"></i></a></td>';
+
                                             echo '
                                                 <tr id="row">
                                                 <td class="editable-cell" hidden>' . $view_desc['id'] . '</td>
-                                                <td contenteditable class="editable-cell qty">' . $view_desc['qty'] . '</td>
-                                                <td contenteditable class="editable-cell" oum>' . $view_desc['oum'] . '</td>
-                                                <td contenteditable class="editable-cell code">' . $view_desc['itemcode'] . '</td>
-                                                <td contenteditable class="editable-cell desc">' . $view_desc['description'] . '</td>
-                                                <td contenteditable class="editable-cell" remark>' . $view_desc['remarks'] . '</td>
-                                                <td style="width:2px; margin-right:0px;" class="drafted_id" "value="' . $view_desc['id'] . '"><a><i class="btn btn-danger btn-sm rounded-5 btn-sm bi bi-x remove" value="' . $view_desc['id'] . '"></i></a></td>
+                                                <td contenteditable class="editable-cell qty" id="' . $view_desc['id'] . '">' . $view_desc['qty'] . '</td>
+                                                <td contenteditable class="editable-cell oum" id="' . $view_desc['id'] . '">' . $view_desc['oum'] . '</td>
+                                                <td contenteditable class="editable-cell code" id="' . $view_desc['id'] . '">' . $view_desc['itemcode'] . '</td>
+                                                <td contenteditable class="editable-cell desc" id="' . $view_desc['id'] . '">' . $view_desc['description'] . '</td>
+                                                <td contenteditable class="editable-cell remark" id="' . $view_desc['id'] . '">' . $view_desc['remarks'] . '</td>
+                                                ';
+                                            if ($get_desc->rowcount() > 5) {
+                                                echo $rem;
+                                            }
+                                            '
                                             </tr>
                                                 ';
+                                            //<td style="width:2px; margin-right:0px;" class="drafted_id" "value="' . $view_desc['id'] . '"><a><i class="btn btn-danger btn-sm rounded-5 btn-sm bi bi-x remove" value="' . $view_desc['id'] . '"></i></a></td>
                                         }
                                         ?>
                                     </tbody>
                                 </table>
+                                <p class="text-secondary"><span id="num_row"></span> / <span>20 rows</span></p>
                         </form>
                     </div>
                 </div>
                 <br>
                 <a class="p-2 bg-success text-light update" id="update" name="update" style=" border:none;"><i class="bi bi-arrow-repeat"><b></i> Update</b></a>
-                <a class="p-2 bg-success text-light upd_gen" id="upd_gen" name="upd_gen" style=" border:none;"><b><i class="bi bi-check2-all"></i> Update & Generate</b></a>
-                <a class="p-2 bg-success text-light generate" id="generate" name="generate" style=" border:none;">Generate</a>
-                <a class="p-2 bg-secondary text-light draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Save as Draft</b></a>
-                <a class="p-2 bg-secondary text-light draft_as_draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Save as Draft</b></a>
-                <a class="p-2 w-15 text-light bg-success mb-3 p-2 w-25" id="clear"><b><i class="bi bi-eraser"></i> Clear</b></a>
+                <a class="p-2 bg-success text-light upd_gen" id="upd_gen" name="upd_gen" style=" border:none;"><b><i class="bi bi-printer-fill"></i> Generate</b></a>
+                <a class="p-2 bg-success text-light generate" id="generate" name="generate" style=" border:none;"><b><i class="bi bi-printer-fill"></i> Generate</b></a>
+                <a class="p-2 bg-primary text-light draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Update Draft</b></a>
+                <a class="p-2 bg-primary text-light draft_as_draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Update Draft</b></a>
+                <a class="p-2 w-15 text-light bg-danger mb-3 p-2 w-25" id="clear"><b><i class="bi bi-eraser"></i> Clear</b></a>
             </div>
         </div>
 
@@ -254,6 +284,7 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <script src="includes/js/draft_update.js"></script>
+    <script src="includes/js/functions/function.js"></script>
 
 </body>
 

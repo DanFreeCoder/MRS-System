@@ -26,6 +26,7 @@ $draft->classification = $_POST['classification'];
 $draft->sub_class = $_POST['sub_class'];
 $draft->cip_account = $_POST['cip_account'];
 $draft->approver = $_POST['approver'];
+$draft->requestor = $_POST['requestor'];
 $draft->id = $_POST['id'];
 $draft->user_id = $_SESSION['id'];
 $draft->status = 0;
@@ -70,6 +71,7 @@ if ($ex) {
     $saves->sub_class = $_POST['sub_class'];
     $saves->cip_account = $_POST['cip_account'];
     $saves->approver = $_POST['approver'];
+    $saves->requestor = $_POST['requestor'];
     $saves->user_id = $_SESSION['id'];
     $saves->status = 4;
     $save = $saves->save_as_draft();

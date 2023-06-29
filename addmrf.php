@@ -17,10 +17,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Nunito', sans-serif;
             box-sizing: border-box;
-            font-weight: 500;
+        }
+
+        @keyframes spinner-grow {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: none;
+            }
         }
 
         a {
@@ -62,7 +74,7 @@
                             </select>
                         </div>
                         <div class="col-4 mb-2">
-                            <div class="label mb-1">Type of Project <span style="color:red;">*</span></div>
+                            <div class="label">Type of Project <span style="color:red;">*</span></div>
                             <select type="text" id="project_type" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <option value="0" selected disabled>Please select type of project</option>
                                 <?php
@@ -72,7 +84,6 @@
                                             <option value="' . $row2['id'] . '">' . $row2['project_type'] . '</option>
                                             ';
                                 }
-
                                 ?>
                             </select>
                         </div>
@@ -109,6 +120,12 @@
                             <div class="label">Approver <span style="color:red;">*</span></div>
                             <input type="text" class="form-control text-secondary" id="approver" placeholder="Enter Approver">
                         </div>
+                        <div class="col-6 mb-2">
+                            <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
+                            <input type="checkbox" name="" id="checkbox" style="width: 30px; height:15px;">
+                            <span class="fw-lighter text-body-secondary">Check if requested by the Foreman/Leadman</span>
+                            <input type="text" class="form-control text-secondary" id="requestor" placeholder="Requestor's Name" style="width: 50%;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,22 +137,23 @@
                         <center class="mb-3">
                             <h3>Item Descriptions</h3>
                         </center>
+
                         <form action="" method="post">
-                            <br> <br>
                             <div class="table-responsive">
+                                <button type="button" id="addrow" style="background-color:#5eb548; color:white; border:none;"><i class="bi bi-plus"></i> Add row</button>
                                 <table class="table table-bordered bg-white table-hover">
                                     <thead>
                                         <th style="width: 1rem;">
-                                            Quantity
+                                            Quantity <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 5rem;">
-                                            UOM
+                                            UOM <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 7rem;">
-                                            Item Code
+                                            Item Code <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 14rem;">
-                                            Descriptions
+                                            Descriptions <span style="color:red;">*</span>
                                         </th>
                                         <th style="width: 8rem;">
                                             Remarks
@@ -143,51 +161,30 @@
                                         <th style="width: 5px;">Action</th>
                                     </thead>
                                     <tbody>
-                                        <tr id="row">
-                                            <td contenteditable class="editable-cell qty"></td>
-                                            <td contenteditable class="editable-cell oum"></td>
-                                            <td contenteditable class="editable-cell code"></td>
-                                            <td contenteditable class="editable-cell desc"></td>
-                                            <td contenteditable class="editable-cell remark"></td>
-                                            <td><button type="button" id="addrow" style="border-radius:100%; background-color:#5eb548; color:white; border:none;"><i class="bi bi-plus"></i></button></td>
+                                        <?php
+                                        for ($i = 0; $i < 5; $i++) {
+                                            echo '
+                                            <tr id="row" ' . $i . '>
+                                            <td contenteditable class="editable-cell qty" id="' . $i . '"></td>
+                                            <td contenteditable class="editable-cell oum" id="' . $i . '"></td>
+                                            <td contenteditable class="editable-cell code" id="' . $i . '"></td>
+                                            <td contenteditable class="editable-cell desc" id="' . $i . '"></td>
+                                            <td contenteditable class="editable-cell remark" id="' . $i . '"></td>
                                         </tr>
-                                        <tr id="row">
-                                            <td contenteditable class="editable-cell qty"></td>
-                                            <td contenteditable class="editable-cell oum"></td>
-                                            <td contenteditable class="editable-cell code"></td>
-                                            <td contenteditable class="editable-cell desc"></td>
-                                            <td contenteditable class="editable-cell remark"></td>
-                                        </tr>
-                                        <tr id="row">
-                                            <td contenteditable class="editable-cell qty"></td>
-                                            <td contenteditable class="editable-cell"></td>
-                                            <td contenteditable class="editable-cell code"></td>
-                                            <td contenteditable class="editable-cell desc"></td>
-                                            <td contenteditable class="editable-cell remark"></td>
-                                        </tr>
-                                        <tr id="row">
-                                            <td contenteditable class="editable-cell qty"></td>
-                                            <td contenteditable class="editable-cell oum"></td>
-                                            <td contenteditable class="editable-cell code"></td>
-                                            <td contenteditable class="editable-cell desc"></td>
-                                            <td contenteditable class="editable-cell remark"></td>
-                                        </tr>
-                                        <tr id="row">
-                                            <td contenteditable class="editable-cell qty"></td>
-                                            <td contenteditable class="editable-cell oum"></td>
-                                            <td contenteditable class="editable-cell code"></td>
-                                            <td contenteditable class="editable-cell desc"></td>
-                                            <td contenteditable class="editable-cell remark"></td>
-                                        </tr>
+                                            ';
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
+                                <p class="text-secondary"><span id="num_row">5</span> / <span>20 rows</span></p>
                         </form>
                     </div>
                 </div>
                 <br>
                 <a class="p-2 w-15 border-0 bg-success text-light" id="generate" name="generate" style=" border:none;"><b><i class="bi bi-check-lg text-light"></i> Generate</b></a>
-                <a class="p-2 w-15 mt-5 draft bg-secondary text-light" style="border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Save as Draft</b></a>
-                <a class="p-2 w-15 text-light bg-success mb-3 p-2 w-25" id="clear"><b><i class="bi bi-eraser"></i> Clear</b></a>
+                <a class="p-2 w-15 mt-5 draft bg-primary text-light" style="border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Save as Draft</b></a>
+                <a class="p-2 w-15 text-light bg-danger mb-3 p-2 w-25" id="clear"><b><i class="bi bi-eraser"></i> Clear</b></a>
+
             </div>
 
         </div>
@@ -203,6 +200,7 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <script src="includes/js/addmrf.js"></script>
+    <script src="includes/js/functions/function.js"></script>
 
 </body>
 

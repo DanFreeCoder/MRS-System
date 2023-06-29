@@ -28,6 +28,7 @@ $update->classification = $_POST['classification'];
 $update->sub_class = $_POST['sub_class'];
 $update->cip_account = $_POST['cip_account'];
 $update->approver = $_POST['approver'];
+$update->requestor = $_POST['requestor'];
 $update->id = $_POST['id'];
 $update->status = 4;
 $update->user_id = $_SESSION['id'];
