@@ -14,8 +14,4 @@ $objremove->status = 0;
 
 $result = $objremove->remove_items();
 
-if ($result) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($result) ? 1 : 0;

@@ -11,8 +11,4 @@ $add->project_type = $_POST['project_type'];
 
 $ins = $add->add_proj_type();
 
-if ($ins) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($ins) ? 1 : 0;

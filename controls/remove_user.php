@@ -9,8 +9,4 @@ $remove = new admin_side($db);
 $remove->id = $_POST['id'];
 $del = $remove->remove_user();
 
-if ($del) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($del) ? 1 : 0;

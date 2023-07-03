@@ -12,9 +12,5 @@ $log->id = $_SESSION['id'];
 $result = $log->check_log();
 
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    if ($row['log'] == 0) {
-        echo 1;
-    } else {
-        echo 0;
-    }
+    echo ($row['log'] == 0) ? 1 : 0;
 }

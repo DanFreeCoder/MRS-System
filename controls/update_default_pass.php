@@ -12,11 +12,6 @@ $users->password = md5($_POST['password']);
 $users->log = 1;
 $users->id = $_SESSION['id'];
 
-
 $upd_users = $users->change_password();
 
-if ($upd_users) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($upd_users) ? 1 : 0;

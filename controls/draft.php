@@ -55,9 +55,5 @@ if ($insert) {
         $ex = $itemdescriptions->save_as_draft_item();
     }
 
-    if ($ex) {
-        echo 1;
-    } else {
-        echo 0;
-    }
+    echo ($ex) ? 1 : 0;
 }

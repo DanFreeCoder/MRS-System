@@ -50,8 +50,5 @@ foreach ($data as $row) {
 
     $exs = $obj_update->update_generated_form_item();
 }
-if ($exs) {
-    echo 1;
-} else {
-    echo 0;
-}
+
+echo ($exs) ? 1 : 0;

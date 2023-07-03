@@ -13,8 +13,4 @@ $update->id = $_POST['upd_id_class'];
 
 $upd = $update->update_classification();
 
-if ($upd) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($upd) ? 1 : 0;

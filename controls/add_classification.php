@@ -12,8 +12,4 @@ $add->items = $_POST['items'];
 
 $ins = $add->add_classification();
 
-if ($ins) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($ins) ? 1 : 0;

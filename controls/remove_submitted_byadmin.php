@@ -15,10 +15,4 @@ foreach ($items as $item) {
     $delete_post = $remove->delete_submitted();
 }
 
-
-
-if ($delete_post) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($delete_post) ? 1 : 0;

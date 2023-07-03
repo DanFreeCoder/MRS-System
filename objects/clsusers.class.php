@@ -14,7 +14,6 @@ class Users
     public function register()
     {
         $sql = "INSERT INTO users SET firstname=?, lastname=?, email=?, username=?, password=?, account_type=?, log=?,status=?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $ins = $this->con->prepare($sql);
 
         $ins->bindParam(1, $this->firstname);
@@ -26,17 +25,22 @@ class Users
         $ins->bindParam(7, $this->log);
         $ins->bindParam(8, $this->status);
 
-        if ($ins->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($ins->execute()) ? true : false;
+    }
+
+    public function check_email()
+    {
+        $sql = "SELECT email FROM users WHERE email = ?";
+        $sel = $this->con->prepare($sql);
+
+        $sel->bindParam(1, $this->email);
+
+        return ($sel->execute()) ? true : false;
     }
 
     public function login()
     {
         $sql = "SELECT * FROM users WHERE username= ? AND password= ? AND status != ?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $login = $this->con->prepare($sql);
 
         $login->bindParam(1, $this->username);
@@ -59,7 +63,6 @@ class Users
     public function update_current_logged()
     {
         $sql = "UPDATE users SET firstname=?, lastname=?, username=?, password=?, log=? WHERE id=?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $upd = $this->con->prepare($sql);
 
         $upd->bindParam(1, $this->firstname);
@@ -69,16 +72,11 @@ class Users
         $upd->bindParam(5, $this->log);
         $upd->bindParam(6, $this->id);
 
-        if ($upd->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($upd->execute()) ? true : false;
     }
     public function update_details_only()
     {
         $sql = "UPDATE users SET firstname=?, lastname=?, username=? WHERE id=?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $upd = $this->con->prepare($sql);
 
         $upd->bindParam(1, $this->firstname);
@@ -86,17 +84,12 @@ class Users
         $upd->bindParam(3, $this->username);
         $upd->bindParam(4, $this->id);
 
-        if ($upd->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($upd->execute()) ? true : false;
     }
 
     public function update_user()
     {
         $sql = "UPDATE users SET firstname = ?, lastname = ?, email=?, account_type=?, username=? WHERE id=?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $upd = $this->con->prepare($sql);
 
         $upd->bindParam(1, $this->firstname);
@@ -106,33 +99,23 @@ class Users
         $upd->bindParam(5, $this->username);
         $upd->bindParam(6, $this->id);
 
-        if ($upd->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($upd->execute()) ? true : false;
     }
     public function recover_account()
     {
         $sql = "UPDATE users SET password = ? WHERE email = ? AND status != ?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $recover = $this->con->prepare($sql);
 
         $recover->bindParam(1, $this->password);
         $recover->bindParam(2, $this->email);
         $recover->bindParam(3, $this->status);
 
-        if ($recover->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($recover->execute()) ? true : false;
     }
 
     public function view_by_email()
     {
         $sql = "SELECT * FROM users WHERE email = ? AND status != ?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $view = $this->con->prepare($sql);
 
         $view->bindParam(1, $this->email);
@@ -145,7 +128,6 @@ class Users
     public function email_by_id()
     {
         $sql = "SELECT id FROM users WHERE email = ? AND status != ?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $byid = $this->con->prepare($sql);
 
         $byid->bindParam(1, $this->email);
@@ -158,18 +140,13 @@ class Users
     public function change_password()
     {
         $sql = "UPDATE users SET password=?, log=? WHERE id=? AND status != 0";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $upd = $this->con->prepare($sql);
 
         $upd->bindParam(1, $this->password);
         $upd->bindParam(2, $this->log);
         $upd->bindParam(3, $this->id);
 
-        if ($upd->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($upd->execute()) ? true : false;
     }
 
     public function update_log()
@@ -181,17 +158,12 @@ class Users
         $log->bindParam(1, $this->log);
         $log->bindParam(2, $this->id);
 
-        if ($log->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($log->execute()) ? true : false;
     }
 
     public function check_log()
     {
         $sql = "SELECT log FROM users WHERE id =?";
-        $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $ch = $this->con->prepare($sql);
 
         $ch->bindParam(1, $this->id);

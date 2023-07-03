@@ -11,8 +11,4 @@ $add->proj_code = $_POST['proj_code'];
 
 $ins = $add->add_pro_code();
 
-if ($ins) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($ins) ? 1 : 0;

@@ -22,8 +22,7 @@ $(document).ready(function () {
                     data: mydata,
 
                     success: function (response) {
-
-                        if (response > 0) {
+                        if (response == 1) {
                             $('.modal').modal('show');
                             var cred = 'firstname=' + fname + '&lastname=' + lname + '&email=' + email;
                             $.ajax({
@@ -34,6 +33,8 @@ $(document).ready(function () {
 
                                 }
                             })
+                        } else if (response == 2) {
+                            toastr.error(`This email is already exist.`).css("background-color", "#ff5e57");
                         } else {
                             toastr.error(`ERROR! Registration Failed. Please get in touch with the system administrator at local number 124.`).css("background-color", "#ff5e57");
                         }

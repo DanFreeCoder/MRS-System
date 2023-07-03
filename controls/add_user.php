@@ -16,8 +16,5 @@ $user->account_type = $_POST['acc_type'];
 $user->status = 1;
 
 $add_user = $user->add_user();
-if ($add_user) {
-    echo 1;
-} else {
-    echo 0;
-}
+
+echo ($add_user) ? 1 : 0;

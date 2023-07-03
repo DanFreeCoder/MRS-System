@@ -64,8 +64,6 @@ foreach ($data as $row) {
 }
 
 if ($ex) {
-
-
     $year = substr(date('Y'), 2);
     $get_count_id = $count_id->count_id();
     while ($row = $get_count_id->fetch(PDO::FETCH_ASSOC)) {
@@ -73,7 +71,6 @@ if ($ex) {
     }
 
     $pro_num = str_pad($pro_id, 5, 0, STR_PAD_LEFT);
-
 
     $generate->date_added = date('Y-m-d');
     $generate->project = $_POST['project'];
@@ -115,11 +112,7 @@ if ($ex) {
         $ex = $generate->gen_after_upd_item();
     }
 
-    if ($ex) {
-        echo 1;
-    } else {
-        echo 0;
-    }
+    echo ($ex) ? 1 : 0;
 } else {
     echo 0;
 }

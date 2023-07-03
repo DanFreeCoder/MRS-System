@@ -16,8 +16,4 @@ $users->username = str_replace(" ", ".", strtolower($_POST['fname'] . '.' . $_PO
 
 $upd_users = $users->update_user();
 
-if ($upd_users) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($upd_users) ? 1 : 0;

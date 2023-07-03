@@ -12,8 +12,4 @@ $add->cip_account = $_POST['cip_account'];
 
 $ins = $add->add_cip();
 
-if ($ins) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($ins) ? 1 : 0;

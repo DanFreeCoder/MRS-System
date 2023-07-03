@@ -13,8 +13,4 @@ $later->id = $_SESSION['id'];
 
 $result = $later->update_log();
 
-if ($result) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($result) ? 1 : 0;

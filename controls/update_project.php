@@ -12,8 +12,4 @@ $update->id = $_POST['upd_id_project'];
 
 $upd = $update->update_projects();
 
-if ($upd) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($upd) ? 1 : 0;

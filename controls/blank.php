@@ -40,9 +40,4 @@ $generate->user_id = $_SESSION['id'];
 $generate->status = 2;
 $insert = $generate->generate();
 
-
-if ($insert) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($insert) ? 1 : 0;

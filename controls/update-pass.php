@@ -17,14 +17,9 @@ switch ($module) {
         $users->log = 0;
         $users->id = $_POST['id'];
 
-
         $upd_users = $users->update_current_logged();
 
-        if ($upd_users) {
-            echo 1;
-        } else {
-            echo 0;
-        }
+        echo ($upd_users) ? 1 : 0;
         break;
     case 'details_only':
         $users->firstname = $_POST['fname'];
@@ -34,9 +29,5 @@ switch ($module) {
 
         $upd_details = $users->update_details_only();
 
-        if ($upd_details) {
-            echo 1;
-        } else {
-            echo 0;
-        }
+        echo ($upd_details) ? 1 : 0;
 }

@@ -12,8 +12,4 @@ $update->id = $_POST['upd_id_code'];
 
 $upd = $update->update_pro_code();
 
-if ($upd) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($upd) ? 1 : 0;

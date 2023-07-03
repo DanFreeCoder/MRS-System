@@ -13,8 +13,4 @@ $remove->user_id = $_SESSION['id'];
 
 $del = $remove->remove_draft_id();
 
-if ($del) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($del) ? 1 : 0;

@@ -70,8 +70,4 @@ foreach ($data as $row) {
     $ex = $itemdescriptions->generate_item();
 }
 
-if ($ex) {
-    echo 1;
-} else {
-    echo 0;
-}
+echo ($ex) ? 1 : 0;

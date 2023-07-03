@@ -16,11 +16,7 @@ switch (true) {
             $project = $row['Project'];
         }
         $array = [1, $project];
-        if ($exe) {
-            echo json_encode($array);
-        } else {
-            echo 0;
-        }
+        echo ($exe) ? json_encode($array) : 0;
         break;
     case isset($_POST['pro_type_id']):
         $edit->id = $_POST['pro_type_id'];
@@ -29,11 +25,7 @@ switch (true) {
             $project_type = $row['project_type'];
         }
         $array1 = [1, $project_type];
-        if ($exe1) {
-            echo json_encode($array1);
-        } else {
-            echo 0;
-        }
+        echo ($exe1) ? json_encode($array1) : 0;
         break;
     case isset($_POST['class_id']):
         $edit->id = $_POST['class_id'];
@@ -43,11 +35,7 @@ switch (true) {
             $items = $row['items'];
         }
         $array2 = [1, $item_id, $items];
-        if ($exe2) {
-            echo json_encode($array2);
-        } else {
-            echo 0;
-        }
+        echo ($exe2) ? json_encode($array2) : 0;
         break;
     case isset($_POST['cip_type_id']):
         $edit->id = $_POST['cip_type_id'];
@@ -57,11 +45,7 @@ switch (true) {
             $cip_account = $row['cip_account'];
         }
         $array3 = [1, $cip_id, $cip_account];
-        if ($exe3) {
-            echo json_encode($array3);
-        } else {
-            echo 0;
-        }
+        echo ($exe3) ? json_encode($array3) : 0;
         break;
     case isset($_POST['code_id']):
         $edit->id = $_POST['code_id'];
@@ -70,10 +54,6 @@ switch (true) {
             $proj_code = $row['proj_code'];
         }
         $array4 = [1, $proj_code];
-        if ($exe4) {
-            echo json_encode($array4);
-        } else {
-            echo 0;
-        }
+        echo ($exe4) ? json_encode($array4) : 0;
         break;
 }
