@@ -48,6 +48,7 @@ $CIP_type = new clsType($db);
         body {
             font-family: 'Nunito', sans-serif;
             box-sizing: border-box;
+            font-size: 1rem;
         }
 
         a {

@@ -24,6 +24,7 @@
         body {
             font-family: 'Nunito', sans-serif;
             box-sizing: border-box;
+            font-size: 1rem;
         }
 
         @keyframes spinner-grow {
@@ -107,6 +108,12 @@
                     <div class="tab-pane fade" id="draft_tab" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="table-responsive">
                             <br>
+                            <!-- <center>
+                                <h1> <mark>
+                                        Down for Maintenance
+                                    </mark></h1>
+                                <p>Sorry, this page is temporarily down for maintenance. Please check back soon.</p>
+                            </center> -->
                             <table class="table table-hover table-responsive draft_table" style="width: 100%; background-color:#f8f9fa;" cellspacing="0">
                                 <thead>
                                     <tr>

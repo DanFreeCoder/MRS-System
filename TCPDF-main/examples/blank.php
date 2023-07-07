@@ -175,80 +175,17 @@ $data_header .= '
 		';
 
 
-
-$data_table .= '
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        <tr>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="1" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="3" style="border:1px solid black; text-align:center;"></td>
-            <td colspan="2" style="border:1px solid black; text-align:center;"></td>
-        </tr>
-        
-    ';
+for ($i = 1; $i < 10; $i++) {
+    $data_table .= '
+    <tr ' . $i . '>
+        <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+        <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+        <td colspan="1" style="border:1px solid black; text-align:center;"></td>
+        <td colspan="3" style="border:1px solid black; text-align:center;"></td>
+        <td colspan="2" style="border:1px solid black; text-align:center;"></td>
+    </tr>   
+';
+}
 
 
 

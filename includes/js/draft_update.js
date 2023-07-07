@@ -595,6 +595,7 @@ exe_generate = (mydata) => {
 
         success: function (response) {
             if (response > 0) {
+
                 window.open("TCPDF-main/examples/MRF_report.php", '_blank');
             } else {
                 toastr.error(`ERROR! Generate Failed.  Please get in touch with the system administrator at local number 124.`).css("background-color", "#ff5e57");

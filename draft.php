@@ -24,6 +24,7 @@
         body {
             font-family: 'Nunito', sans-serif;
             box-sizing: border-box;
+            font-size: 1rem;
         }
 
         @keyframes spinner-grow {
@@ -143,10 +144,14 @@
                             <div class="label">CIP Account <span style="color:red;">*</span></div>
                             <select type="text" id="cip_account" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <?php
-                                $classification->id = $cipname1;
-                                $get_CIP = $classification->CIP_type2();
+
+                                $get_CIP = $classification->CIP_type3();
                                 while ($view_cip = $get_CIP->fetch(PDO::FETCH_ASSOC)) {
-                                    echo ' <option value="' . $view_cip['cip_id'] . '" selected>' . $view_cip['cip_account'] . '</option>';
+                                    if ($cipname1 == $view_cip['id']) {
+                                        echo ' <option value="' . $view_cip['id'] . '" selected>' . $view_cip['cip_account'] . '</option>';
+                                    } else {
+                                        echo ' <option value="' . $view_cip['id'] . '">' . $view_cip['cip_account'] . '</option>';
+                                    }
                                 }
                                 ?>
                             </select>

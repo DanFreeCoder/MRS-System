@@ -353,7 +353,7 @@ $(document).ready(function () {
     //add row
 
     var num_row = 5;
-    var count = 1;
+   
     $('#num_row').text(num_row)
     $('#addrow').on('click', function () {
         num_row = num_row += 1;

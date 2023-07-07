@@ -50,7 +50,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 $pdf->SetDisplayMode(100, 'default');
 $pdf->setCreator(PDF_CREATOR);
 $pdf->setAuthor('Owen Leibman');
-$pdf->setTitle('MRF report');
+$pdf->setTitle('MRS report');
 $pdf->setSubject('TCPDF Tutorial');
 $pdf->setKeywords('TCPDF, PDF, example, test, guide');
 
@@ -390,7 +390,7 @@ if ($html_length >= 1800) {
 
 
 //Close and output PDF document
-$pdf->Output('MRF report.pdf', 'I');
+$pdf->Output('MRS report.pdf', 'I');
 
 //============================================================+
 // END OF FILE

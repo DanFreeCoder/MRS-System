@@ -15,6 +15,7 @@ $(document).ready(function () {
         var username = $('#username').val();
         var password = $('#password').val();
         var mydata = 'username=' + username + '&password=' + password;
+        //   window.location = "error_404.php";
         if (username != '' && password != '') {
             grecaptcha.enterprise.ready(function () {
                 grecaptcha.enterprise.execute('6Lfn5U4mAAAAAGlqhcoNylxg9Ct3fABximVjO1xo', {

@@ -123,6 +123,14 @@ class admin_side
         $sel->execute();
         return $sel;
     }
+    public function group_by_project()
+    {
+        $sql = "SELECT project_code, series_number, status, project_name FROM `series_con_num` WHERE status != 0 GROUP BY project_code, series_number, project_name ORDER BY id ";
+        $sel = $this->con->prepare($sql);
+
+        $sel->execute();
+        return $sel;
+    }
 
     public function add_projects()
     {
@@ -222,6 +230,7 @@ class admin_side
         $edit->execute();
         return $edit;
     }
+
     public function remove_project()
     {
         $sql = "UPDATE projects SET status = 0 WHERE id = ?";

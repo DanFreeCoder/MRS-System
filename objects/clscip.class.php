@@ -151,6 +151,28 @@ class clsType
         return $sel;
     }
 
+    public function last_series_num()
+    {
+        $sql = "SELECT * FROM series_con_num WHERE project_code = ? ORDER BY id DESC LIMIT 1";
+        $code = $this->con->prepare($sql);
+
+        $code->bindParam(1, $this->project_code);
+
+        $code->execute();
+        return $code;
+    }
+
+    public function update_series_num()
+    {
+        $sql = "UPDATE series_con_num SET series_number = ? WHERE project_code = ?";
+        $upd = $this->con->prepare($sql);
+
+        $upd->bindParam(1, $this->series_number);
+        $upd->bindParam(2, $this->project_code);
+
+        return $upd->execute() ? true : false;
+    }
+
     public function save_as_draft()
     {
         $sql = "INSERT INTO save_as_draft SET date_added=?, project=?, typeof_project=?, classification=?, sub_class=?, cip_account=?, approver=?, requestor=?, user_id=?, status=?";

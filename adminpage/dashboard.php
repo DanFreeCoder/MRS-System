@@ -32,6 +32,26 @@
     <link rel="stylesheet" href="../admin_assets/toastr/toastr.min.css">
     <link href="../admin_assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../admin_assets/dist/datatable/dataTables.bootstrap5.min.css">
+
+    <style>
+        .card {
+            text-align: center;
+            height: 18vh;
+            padding-bottom: 15px;
+            margin-bottom: 10px;
+        }
+
+        .card h1 {
+            color: #009cff;
+            margin: 0;
+            margin-top: 5px;
+        }
+
+        .card h2 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: #535c68;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,6 +74,25 @@
             <?php include 'includes/navbar.php'; ?>
             <!-- Navbar End -->
 
+            <div class=" container-fluid pt-3 p-3">
+                <div class="row bg-light p-3 rounded">
+                    <?php
+                    $project_code = $admin_side->group_by_project();
+                    while ($row = $project_code->fetch(PDO::FETCH_ASSOC)) {
+                        echo '
+                        <div class="col-3">
+                        <div class="card" style="background-color: white; ">
+                           <h1>' . $row['project_code'] . '</h1>
+                            <small>' . $row['project_name'] . '</small>
+                            <h2>' . intval($row['series_number']) . '</h2>
+                            
+                        </div>
+                    </div>
+                        ';
+                    }
+                    ?>
+                </div>
+            </div>
 
 
             <!-- Submitted form Start -->

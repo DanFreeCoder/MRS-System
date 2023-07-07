@@ -35,11 +35,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-
-
         body {
             font-family: 'Nunito', sans-serif;
             box-sizing: border-box;
+            font-size: 1rem;
         }
     </style>
 </head>
