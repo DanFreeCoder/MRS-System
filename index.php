@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta description="Innogroup Innoland System">
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -24,9 +25,8 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/toastr/toastr.min.css">
     <link rel="stylesheet" href="assets/select2/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://nightly.datatables.net/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link href="assets/bootstrap@5.3.0/bootstrap.min.css">
 
 
     <!-- =======================================================
@@ -48,9 +48,7 @@
         }
     </style>
 </head>
-
 <body>
-
     <main>
         <div class="container" style="height:max-content;">
             <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">

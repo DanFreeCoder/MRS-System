@@ -6,7 +6,6 @@ $(document).ready(function () {
         var id = location.search.split('id=')[1] // get the GET value 
 
         var mydata = 'password=' + password + '&id=' + id;
-
         if (password != '') {
             if (password == retype) {
                 $.ajax({
@@ -27,13 +26,7 @@ $(document).ready(function () {
         } else {
             toastr.error(`All fields are required`).css("background-color", "#ff5e57");
         }
-
-
     });
-
-
-
-
 
     toastr.options = {
         "closeButton": true,

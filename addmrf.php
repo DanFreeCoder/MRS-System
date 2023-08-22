@@ -14,8 +14,8 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/toastr/toastr.min.css">
     <link rel="stylesheet" href="assets/select2/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link href="assets/bootstrap@5.3.0/bootstrap.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
@@ -164,13 +164,12 @@
                                     <tbody>
                                         <?php
                                         for ($i = 0; $i < 5; $i++) {
-                                            echo '
-                                            <tr id="row" ' . $i . '>
-                                            <td contenteditable class="editable-cell qty" id="' . $i . '"></td>
-                                            <td contenteditable class="editable-cell oum" id="' . $i . '"></td>
-                                            <td contenteditable class="editable-cell code" id="' . $i . '"></td>
-                                            <td contenteditable class="editable-cell desc" id="' . $i . '"></td>
-                                            <td contenteditable class="editable-cell remark" id="' . $i . '"></td>
+                                            echo '<tr id="row" ' . $i . '>
+                                            <td contenteditable class="editable-cell qty" name="qty" id="qty-' . $i . '"></td>
+                                            <td contenteditable class="editable-cell oum" id="uom-' . $i . '"></td>
+                                            <td contenteditable class="editable-cell code" id="cod-' . $i . '"></td>
+                                            <td contenteditable class="editable-cell desc" id="des-' . $i . '"></td>
+                                            <td contenteditable class="editable-cell remark" id="rem-' . $i . '"></td>
                                         </tr>
                                             ';
                                         }
@@ -201,7 +200,7 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <script src="includes/js/addmrf.js"></script>
-    <script src="includes/js/functions/function.js"></script>
+    <script src="includes/js/functions/function.js?v=1.1"></script>
 
 </body>
 

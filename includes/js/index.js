@@ -1,6 +1,5 @@
 
 $(document).ready(function () {
-
     var uname = location.search.split('uname=')[1] // get the GET value 
     $('#username').val(uname);
 
@@ -8,14 +7,14 @@ $(document).ready(function () {
         window.location = "home.php";
     })
 
-
     //login
     $('#login').on('click', function (e) {
         e.preventDefault();
+        //  window.location = "error_404.php";
         var username = $('#username').val();
         var password = $('#password').val();
         var mydata = 'username=' + username + '&password=' + password;
-        //   window.location = "error_404.php";
+        //  window.location = "error_404.php";
         if (username != '' && password != '') {
             grecaptcha.enterprise.ready(function () {
                 grecaptcha.enterprise.execute('6Lfn5U4mAAAAAGlqhcoNylxg9Ct3fABximVjO1xo', {
@@ -35,17 +34,13 @@ $(document).ready(function () {
                             }
                         }
                     })
-
                 });
             });
         } else {
             toastr.error(`All fields are required`).css("background-color", "#ff5e57");
         }
-
     })
-
 });
-
 
 
 toastr.options = {

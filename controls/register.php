@@ -10,7 +10,9 @@ $users = new Users($db);
 $users->email = $_POST['email'];
 $check = $users->check_email();
 
-if (!$check) {
+if ($check->rowcount() !== 0) {
+    echo 2;
+} else {
     $users->firstname = $_POST['fname'];
     $users->lastname = $_POST['lname'];
     $users->email = $_POST['email'];
@@ -23,6 +25,4 @@ if (!$check) {
     $register = $users->register();
 
     echo ($register) ? 1 : 0;
-} else {
-    echo 2;
 }

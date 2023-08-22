@@ -77,44 +77,13 @@ $(document).ready(function () {
         dropdownParent: $('#mrf_modal')
     });
 
-    function reload(time) {
-        setTimeout(function () {
-            location.reload();
-        }, time);
-    }
-
-
-
-    $('#admin_side').on('click', function () {
-        window.location = "adminpage/dashboard.php?click=" + 'man';
-    })
-    //delete zero status in item_as_draft table // this is for amdin
-    // $.ajax({
-    //     type: 'POST',
-    //     url: 'controls/delete_zero_status',
-
-    //     success: function (response) {
-    //         if (response > 0) {
-    //             alert('rows has been remove');
-    //         }
-    //     }
-    // })
-
-    // $('.submitted_table').dataTable();
-    // $('.draft_table').dataTable();
-
-
-    $('#logout').on('click', function () {
-        $('#log_out').modal('show');
-    });
-    $('#out').on('click', function () {
-        window.location = "../mrs/controls/logout.php";
-    });
+    $('#admin_side').on('click', () => window.location = "adminpage/dashboard.php?click=" + 'man');
+    $('#logout').on('click', () => $('#log_out').modal('show'));
+    $('#out').on('click', () => window.location = "../mrs/controls/logout.php");
     $('#settings').on('click', function (e) {
         e.preventDefault();
         $('#settingmodal').modal('show');
     });
-
 
     //modal update user settings
     $('#save_upd').on('click', (e) => {
@@ -164,21 +133,16 @@ $(document).ready(function () {
             })
         }
     });
-
 });
-
 // update password first login
 $(document).on('click', '.update_pass', function () {
-
     var password = $('#new-password').val();
     var repass = $('#con-password').val();
-
     if (password == repass) {
         $.ajax({
             type: 'post',
             url: 'controls/update_default_pass.php',
             data: { password: password },
-
             success: function (response) {
                 if (response > 0) {
                     $('#logcount').modal('toggle');
@@ -186,7 +150,6 @@ $(document).on('click', '.update_pass', function () {
                     setTimeout(function () {
                         window.location = "../mrs/controls/logout.php";
                     }, 6000);
-
                 }
             }
         })
@@ -216,8 +179,6 @@ $(document).on('click', '.print', function () {
     window.open("TCPDF-main/examples/print_by_id.php?" + 'id=' + id, '_blank');
 });
 
-
-
 $('#print_as_blank').on('click', function () {
     var project = $('#project').val();
     var project_type = $('#project_type').val();
@@ -231,9 +192,7 @@ $('#print_as_blank').on('click', function () {
     if (!checked) {
         requestor = '';
     }
-
     var mydata = 'project=' + project + '&project_type=' + project_type + '&classification=' + classification + '&sub_class=' + sub_class + '&cip_account=' + cip_account + '&approver=' + approver + '&requestor=' + requestor;
-
     if (project != '' && project_type != '' && classification != '' && cip_account != '' && approver != '') {
         $.ajax({
             type: 'POST',
@@ -251,22 +210,15 @@ $('#print_as_blank').on('click', function () {
     } else {
         //show toast
         toastr.error(`Fields with asterisks(*) are required`).css("background-color", "#ff5e57");
-
     }
-
-
 })
-
 
 $('#blank').on('click', () => {
     $('#mrf_modal').modal('show');
 });
 
-
-
 $('#project_type').on('change', function () {
     var selectedVal = $(this).val();
-
     $.ajax({
         type: 'POST',
         url: 'controls/get_cip_acc.php',

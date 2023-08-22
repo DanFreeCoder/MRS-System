@@ -35,17 +35,28 @@ $update->user_id = $_SESSION['id'];
 $save = $update->update();
 
 
-$data = json_decode($_POST['data']);
+$data = json_decode($_POST['data'], true);
+// echo print_r($data);
 
 foreach ($data as $row) {
-    $col1 = $row[0]; //id
-    $col2 = $row[1]; //qty
-    $col3 = $row[2]; //uom
-    $col4 = $row[3]; //itemcode
-    // $col5 = $row[4];
-    $col6 = $row[4]; //description
-    // $col7 = $row[6];
-    $col8 = $row[5]; //remarks
+    if ($row['id2'] == '' || $row['id2'] == null) {
+        $itemdescriptions->item_id = $_POST['id'];
+        $itemdescriptions->qty = $row['qty'];
+        $itemdescriptions->oum = $row['uom'];
+        $itemdescriptions->itemcode = $row['code'];
+        $itemdescriptions->description = $row['desc'];
+        $itemdescriptions->remarks = $row['remark'];
+        $itemdescriptions->user_id = $_SESSION['id'];
+        $itemdescriptions->status = 4;
+
+        $itemdescriptions->add_item_no_exist();
+    }
+    $col1 = $row['id2']; //id
+    $col2 = $row['qty']; //qty
+    $col3 = $row['uom']; //uom
+    $col4 = $row['code']; //itemcode
+    $col6 = $row['desc']; //description
+    $col8 = $row['remark']; //remarks
 
     $itemdescriptions->qty = $col2;
     $itemdescriptions->oum = $col3;

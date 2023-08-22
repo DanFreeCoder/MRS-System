@@ -151,7 +151,7 @@
         })
 
         if (id <= 1) {
-            toastr["error"]("Please select the specific user");
+            toastr["error"]("Please select the specific form");
         } else {
             toastr["error"]("Are you sure you want to remove this users?<br /><br /><button type='button' class='btn- btn-sm yes'>Yes</button>")
             $('.yes').on('click', function () {

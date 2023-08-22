@@ -31,29 +31,28 @@ $insert = $draft->save_as_draft();
 
 if ($insert) {
 
-    $data = json_decode($_POST['data']);
+    $data = json_decode($_POST['data'], true);
+    if ($data == null) {
+        echo 1;
+    } else {
+        foreach ($data as $row) {
+            $col1 = $row['qty'];
+            $col2 = $row['uom'];
+            $col3 = $row['code'];
+            $col4 = $row['desc'];
+            $col5 = $row['remark'];
 
-    foreach ($data as $row) {
-        $col1 = $row[0];
-        $col2 = $row[1];
-        $col3 = $row[2];
-        // $col4 = $row[3];
-        $col5 = $row[3];
-        // $col6 = $row[5];
-        $col7 = $row[4];
+            $itemdescriptions->qty = $col1;
+            $itemdescriptions->oum = $col2;
+            $itemdescriptions->itemcode = $col3;
+            $itemdescriptions->description = $col4;
+            $itemdescriptions->remarks = $col5;
+            $itemdescriptions->user_id = $_SESSION['id'];
+            $itemdescriptions->status = 4;
 
-        $itemdescriptions->qty = $col1;
-        $itemdescriptions->oum = $col2;
-        $itemdescriptions->itemcode = $col3;
-        // $itemdescriptions->brand = $col4;
-        $itemdescriptions->description = $col5;
-        // $itemdescriptions->color = $col6;
-        $itemdescriptions->remarks = $col7;
-        $itemdescriptions->user_id = $_SESSION['id'];
-        $itemdescriptions->status = 4;
+            $ex = $itemdescriptions->save_as_draft_item();
+        }
 
-        $ex = $itemdescriptions->save_as_draft_item();
+        echo ($ex) ? 1 : 0;
     }
-
-    echo ($ex) ? 1 : 0;
 }

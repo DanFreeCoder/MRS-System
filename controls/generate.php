@@ -15,9 +15,6 @@ $count_id = new clsType($db);
 
 //generate after update without adding rows
 
-
-
-
 $update->date_added = date('Y-m-d');
 $update->project = $_POST['project'];
 $update->typeof_project = $_POST['project_type'];
@@ -33,17 +30,15 @@ $update->user_id = $_SESSION['id'];
 $save = $update->update();
 
 
-$data = json_decode($_POST['data']);
+$data = json_decode($_POST['data'], true);
 
 foreach ($data as $row) {
-    $col1 = $row[0]; //id
-    $col2 = $row[1];
-    $col3 = $row[2];
-    $col4 = $row[3];
-    // $col5 = $row[4];
-    $col6 = $row[4];
-    // $col7 = $row[6];
-    $col8 = $row[5];
+    $col1 = $row['id2']; //id
+    $col2 = $row['qty'];
+    $col3 = $row['uom'];
+    $col4 = $row['code'];
+    $col6 = $row['desc'];
+    $col8 = $row['remark'];
 
     $itemdescriptions->qty = $col2;
     $itemdescriptions->oum = $col3;
@@ -101,17 +96,17 @@ if ($ex) {
     $generate->status = 1;
     $save = $generate->gen_after_upd();
 
-    $data = json_decode($_POST['data']);
+    $data = json_decode($_POST['data'], true);
 
     foreach ($data as $row) {
-        $col1 = $row[0]; //id
-        $col2 = $row[1];
-        $col3 = $row[2];
-        $col4 = $row[3];
+        $col1 = $row['id2']; //id
+        $col2 = $row['qty'];
+        $col3 = $row['uom'];
+        $col4 = $row['code'];
         // $col5 = $row[4];
-        $col6 = $row[4];
+        $col6 = $row['desc'];
         // $col7 = $row[6];
-        $col8 = $row[5];
+        $col8 = $row['remark'];
 
         $generate->qty = $col2;
         $generate->oum = $col3;

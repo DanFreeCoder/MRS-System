@@ -34,8 +34,8 @@ class Users
         $sel = $this->con->prepare($sql);
 
         $sel->bindParam(1, $this->email);
-
-        return ($sel->execute()) ? true : false;
+        $sel->execute();
+        return $sel;
     }
 
     public function login()

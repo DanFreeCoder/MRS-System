@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/toastr/toastr.min.css">
     <link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/bootstrap@5.3.0/bootstrap.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
@@ -201,33 +201,46 @@
                                         <th style="width: 8rem;">
                                             Remarks
                                         </th>
-                                        <th id="action" hidden>Action</th>
+                                        <!-- <th id="action" hidden>Action</th> -->
                                         <!-- <th style="width: 5px;"><i class="bi bi-arrows-move"></i></th> -->
                                     </thead>
                                     <tbody>
                                         <?php
+                                        $i = 0;
                                         $view_description_draft->id = $_GET['id'];
                                         $get_desc = $view_description_draft->view_draft_item_descriptions();
+                                        $count = $get_desc->rowcount();
+                                        $data = '';
                                         while ($view_desc = $get_desc->fetch(PDO::FETCH_ASSOC)) {
                                             $rem = '<td style="width:2px; margin-right:0px;" class="drafted_id" "value="' . $view_desc['id'] . '"><a><i class="btn btn-danger btn-sm rounded-5 btn-sm bi bi-x remove" value="' . $view_desc['id'] . '"></i></a></td>';
 
-                                            echo '
-                                                <tr id="row">
-                                                <td class="editable-cell" hidden>' . $view_desc['id'] . '</td>
-                                                <td contenteditable class="editable-cell qty" id="' . $view_desc['id'] . '">' . $view_desc['qty'] . '</td>
-                                                <td contenteditable class="editable-cell oum" id="' . $view_desc['id'] . '">' . $view_desc['oum'] . '</td>
-                                                <td contenteditable class="editable-cell code" id="' . $view_desc['id'] . '">' . $view_desc['itemcode'] . '</td>
-                                                <td contenteditable class="editable-cell desc" id="' . $view_desc['id'] . '">' . $view_desc['description'] . '</td>
-                                                <td contenteditable class="editable-cell remark" id="' . $view_desc['id'] . '">' . $view_desc['remarks'] . '</td>
-                                                ';
-                                            if ($get_desc->rowcount() > 5) {
-                                                echo $rem;
-                                            }
-                                            '
-                                            </tr>
-                                                ';
+                                            $data .= '
+                                           <tr id="row">
+                                           <td class="editable-cell" hidden id="id2-' . $i . '">' . $view_desc['id'] . '</td>
+                                           <td contenteditable class="editable-cell qty" name="qty" id="qty-' . $i . '">' . $view_desc['qty'] . '</td>
+                                           <td contenteditable class="editable-cell oum" id="uom-' . $i . '">' . $view_desc['oum'] . '</td>
+                                           <td contenteditable class="editable-cell code" id="cod-' . $i . '">' . $view_desc['itemcode'] . '</td>
+                                           <td contenteditable class="editable-cell desc" id="des-' . $i . '">' . $view_desc['description'] . '</td>
+                                           <td contenteditable class="editable-cell remark" id="rem-' . $i . '">' . $view_desc['remarks'] . '</td>
+                                           </tr>';
+
+                                            $i++;
+
                                             //<td style="width:2px; margin-right:0px;" class="drafted_id" "value="' . $view_desc['id'] . '"><a><i class="btn btn-danger btn-sm rounded-5 btn-sm bi bi-x remove" value="' . $view_desc['id'] . '"></i></a></td>
                                         }
+                                        if ($count < 5) {
+                                            for ($i = $count; $i < 5; $i++) {
+                                                $data .= ' 
+                                                <tr id="row" ' . $i . '>
+                                                <td contenteditable class="editable-cell qty" name="qty" id="qty-' . $i . '"></td>
+                                                <td contenteditable class="editable-cell oum" id="uom-' . $i . '"></td>
+                                                <td contenteditable class="editable-cell code" id="cod-' . $i . '"></td>
+                                                <td contenteditable class="editable-cell desc" id="des-' . $i . '"></td>
+                                                <td contenteditable class="editable-cell remark" id="rem-' . $i . '"></td>
+                                               </tr>';
+                                            }
+                                        }
+                                        echo $data;
                                         ?>
                                     </tbody>
                                 </table>
@@ -237,7 +250,7 @@
                 </div>
                 <br>
                 <a class="p-2 bg-success text-light update" id="update" name="update" style=" border:none;"><i class="bi bi-arrow-repeat"><b></i> Update</b></a>
-                <a class="p-2 bg-success text-light upd_gen" id="upd_gen" name="upd_gen" style=" border:none;"><b><i class="bi bi-printer-fill"></i> Generate</b></a>
+                <!-- <a class="p-2 bg-success text-light upd_gen" id="upd_gen" name="upd_gen" style=" border:none;"><b><i class="bi bi-printer-fill"></i> Generate</b></a> -->
                 <a class="p-2 bg-success text-light generate" id="generate" name="generate" style=" border:none;"><b><i class="bi bi-printer-fill"></i> Generate</b></a>
                 <a class="p-2 bg-primary text-light draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Update Draft</b></a>
                 <a class="p-2 bg-primary text-light draft_as_draft" name="draft" style=" border:none;"><b><i class="bi bi-clipboard-check text-light"></i> Update Draft</b></a>
@@ -289,7 +302,7 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <script src="includes/js/draft_update.js"></script>
-    <script src="includes/js/functions/function.js"></script>
+    <script src="includes/js/functions/function.js?v=1.1"></script>
 
 </body>
 

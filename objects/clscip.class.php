@@ -192,6 +192,23 @@ class clsType
         return ($ins->execute()) ? true : false;
     }
 
+    //update item where no item_id
+    public function add_item_no_exist()
+    {
+        $sql = "INSERT INTO item_as_draft SET item_id = ?, qty=?, oum=?, itemcode=?, description=?, remarks=?, user_id=?, status=?";
+        $ins = $this->con->prepare($sql);
+
+        $ins->bindParam(1, $this->item_id);
+        $ins->bindParam(2, $this->qty);
+        $ins->bindParam(3, $this->oum);
+        $ins->bindParam(4, $this->itemcode);
+        $ins->bindParam(5, $this->description);
+        $ins->bindParam(6, $this->remarks);
+        $ins->bindParam(7, $this->user_id);
+        $ins->bindParam(8, $this->status);
+
+        return ($ins->execute()) ? true : false;
+    }
     public function save_as_draft_item()
     {
         $sql = "INSERT INTO item_as_draft SET item_id = (SELECT COUNT(id) as item_id FROM save_as_draft), qty=?, oum=?, itemcode=?, description=?, remarks=?, user_id=?, status=?";

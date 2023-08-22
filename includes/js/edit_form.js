@@ -71,10 +71,7 @@ $(document).ready(function () {
         var cip_account = $('#cip_account option:selected').val();
         var approver = $('#approver').val();
 
-        // alert(classification)
-        // alert(cip_account)
         var data = [];
-
         $('table tbody tr').each(function () {
             var row = [];
             $(this).find('td').each(function () {
@@ -136,5 +133,4 @@ $(document).ready(function () {
             location.reload();
         }, duration)
     }
-    //end of document
-});
+});//end of document

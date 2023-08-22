@@ -49,7 +49,7 @@ class cls_draft
 
     public function view_draft_item_descriptions()
     {
-        $sql = "SELECT item_as_draft.id, item_as_draft.qty, item_as_draft.oum, item_as_draft.itemcode, item_as_draft.description, item_as_draft.remarks FROM item_as_draft WHERE item_as_draft.item_id = ? AND item_as_draft.status != 0"; //drafted id
+        $sql = "SELECT item_as_draft.id, item_as_draft.item_id, item_as_draft.qty, item_as_draft.oum, item_as_draft.itemcode, item_as_draft.description, item_as_draft.remarks FROM item_as_draft WHERE item_as_draft.item_id = ? AND item_as_draft.status != 0"; //drafted id
         $view = $this->con->prepare($sql);
         $view->bindParam(1, $this->id);
 

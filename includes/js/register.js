@@ -1,7 +1,4 @@
 $(document).ready(function () {
-
-
-
     $('#create').on('click', (e) => {
         e.preventDefault();
         var myStr = $('#email').val();
@@ -27,7 +24,7 @@ $(document).ready(function () {
                             var cred = 'firstname=' + fname + '&lastname=' + lname + '&email=' + email;
                             $.ajax({
                                 type: 'POST',
-                                url: 'controls/regEmail.php',
+                                url: 'controls/regEmail.php?v=' + controllerVersion,
                                 data: cred,
                                 success: function (response) {
 
@@ -46,15 +43,10 @@ $(document).ready(function () {
         } else {
             toastr.error(`Invalid email address.`).css("background-color", "#ff5e57");
         }
-
     })
 });
 
-$('#ok').on('click', function () {
-    window.location = "index.php";
-})
-
-
+$('#ok').on('click', () => window.location = "index.php");
 
 // < !--USERNAME AUTO GENERATE-- >
 

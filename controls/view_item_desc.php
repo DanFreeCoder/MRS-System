@@ -10,10 +10,11 @@ $view_desc = new clsitem_descriptions($db);
 $view_desc->item_id = $_POST['id'];
 $view_desc->user_id = $_SESSION['id'];
 $view = $view_desc->view_item_desc_by_id();
-
+$count = $view->rowcount();
+$data = '';
 while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
 
-    echo '
+    $data .= '
     <tr>
     <td>' . $row['qty'] . '</td>
     <td>' . $row['oum'] . '</td>
@@ -23,3 +24,17 @@ while ($row = $view->fetch(PDO::FETCH_ASSOC)) {
     </tr>
     ';
 }
+if ($count < 5) {
+    for ($i = $count; $i < 5; $i++) {
+        $data .= '
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    ';
+    }
+}
+echo $data;

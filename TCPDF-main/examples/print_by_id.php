@@ -180,6 +180,7 @@ $data_header .= '
 
 $mrf_print->item_id = $id;
 $get_table = $mrf_print->get_item_table_by_id();
+$count = $get_table->rowcount();
 while ($row2 = $get_table->fetch(PDO::FETCH_ASSOC)) {
     $qty = $row2['qty'];
     $oum = $row2['oum'];
@@ -197,6 +198,19 @@ while ($row2 = $get_table->fetch(PDO::FETCH_ASSOC)) {
             <td colspan="2" class="td" align="center">' . $remarks . '</td>    
         </tr>
     ';
+}
+if ($count < 5) {
+    for ($i = $count; $i < 5; $i++) {
+        $data_table .= '
+        <tr ' . $i . '>
+        <td colspan="1" class="td" align="center"></td>
+        <td colspan="1" class="td" align="center"></td>
+        <td colspan="1" class="td" align="center"></td>    
+        <td colspan="3" class="td" align="center"></td>    
+        <td colspan="2" class="td" align="center"></td>    
+    </tr>
+        ';
+    }
 }
 
 
