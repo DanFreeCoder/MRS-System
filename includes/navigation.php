@@ -4,6 +4,7 @@ include 'objects/clscip.class.php';
 include 'objects/clsdraft.class.php';
 include 'objects/clsitem_desc.class.php';
 include 'objects/clsadmin_side.class.php';
+include 'objects/clsEncryptor.php';
 session_start();
 $database = new clsMRFconnection();
 $db = $database->connect();
@@ -19,6 +20,7 @@ $view_description_draft = new cls_draft($db);
 $view_sub_class_draft = new cls_draft($db);
 $tbl_details = new clsitem_descriptions($db);
 $admin_side = new admin_side($db);
+$encryptor = new Encryptor();
 
 if (!isset($_SESSION['firstname'])) {
     header('Location: controls/logout.php');

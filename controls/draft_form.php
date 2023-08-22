@@ -1,10 +1,12 @@
 <?php
 include '../config/connection.php';
 include '../objects/clscip.class.php';
+include '../objects/clsEncryptor.php';
 session_start();
 $database = new clsMRFconnection();
 $db = $database->connect();
 
+$encryptor = new Encryptor();
 $draft = new clsType($db);
 
 $data = array();
@@ -57,7 +59,7 @@ while ($row = $get_data->fetch(PDO::FETCH_ASSOC)) {
     $classif = $row['classif'];
     $sub_class = $row['sub_class'];
     $cip_name = $row['cip_name'];
-    $action = '<a href="draft.php?id=' . $row['id'] . '" class="edit" style="color:green;"><i class="bi bi-pencil-square"></i>Edit</a>';
+    $action = '<a href="draft.php?' . md5('id') . '=' . $encryptor->encrypt_secreKey($row['id']) . '" class="edit" style="color:green;"><i class="bi bi-pencil-square"></i>Edit</a>';
 
     $data[] = array($date_added, $Project, $project_type, $classif, $sub_class, $cip_name, $action);
 }

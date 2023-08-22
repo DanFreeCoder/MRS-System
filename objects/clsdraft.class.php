@@ -69,7 +69,7 @@ class cls_draft
 
     public function drafted_data()
     {
-        $sql = "SELECT project, typeof_project, classification, sub_class, cip_account, approver, requestor, user_id FROM save_as_draft WHERE status !=0 AND id = ?";
+        $sql = "SELECT project, typeof_project, classification, sub_class, cip_account, approver, requestor, user_id FROM save_as_draft WHERE status != 0 AND id = ?";
         $view = $this->con->prepare($sql);
         $view->bindParam(1, $this->id);
 

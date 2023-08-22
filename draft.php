@@ -57,9 +57,9 @@
             <div class="container" style="margin-top: 100px;">
 
                 <?php
-                $id = $_GET['id'];
+                $get_id = $encryptor->decrypt_secretKey($_GET[md5('id')]);
 
-                $view_description_draft->id = $_GET['id'];
+                $view_description_draft->id = $get_id;
                 $result = $view_description_draft->drafted_data();
                 while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
                     $project1 = $rows['project'];
@@ -74,7 +74,7 @@
                 <div class="content1 p-3 mt-2" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
                     <center>
                         <h3 class="mb-5">Material Requisition Slip</h3>
-                        <input type="text" id="get_id" value="<?php $_GET['id']; ?>" hidden>
+                        <input type="text" id="get_id" value="<?php echo $get_id; ?>" hidden>
                     </center>
                     <div class="row">
                         <div class="col-4 mb-2">
@@ -97,8 +97,6 @@
                             <div class="label">Type of Project <span style="color:red;">*</span></div>
                             <select type="text" id="project_type" class="select2 form-control js-example-basic-single" style="width: 100%">
                                 <?php
-
-
                                 $get = $project_type->get_type_of_project();
                                 while ($row2 = $get->fetch(PDO::FETCH_ASSOC)) {
                                     if ($row2['id'] == $project_type1) {
@@ -115,13 +113,6 @@
                             <div class="label">Classification <span style="color:red;">*</span></div>
                             <select type="text" id="classification" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <?php
-                                // $view_classication_draft->id = $_GET['id'];
-                                // $get_classification = $view_classication_draft->view_draft_classification();
-                                // while ($view_class = $get_classification->fetch(PDO::FETCH_ASSOC)) {
-                                //     echo '<option value="' . $view_class['class_id'] . '" selected>' . $view_class['class_name'] . '</option>';
-                                // }
-
-
                                 $get_class = $classification->get_class();
                                 while ($rowc = $get_class->fetch(PDO::FETCH_ASSOC)) {
                                     if ($rowc['class_item_id'] == $classname1) {
@@ -137,7 +128,7 @@
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Sub-Classification</div>
                             <input type="text" class="form-control text-secondary" value="<?php echo $sub_class1; ?>" id="sub_class" placeholder="Enter  Sub-Classification">
-                            <input type="text" id="id" value="<?php echo $id; ?>" hidden>
+                            <input type="text" id="id" value="<?php echo $get_id; ?>" hidden>
                         </div>
                         <div class="col-5 mb-3">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
@@ -207,7 +198,7 @@
                                     <tbody>
                                         <?php
                                         $i = 0;
-                                        $view_description_draft->id = $_GET['id'];
+                                        $view_description_draft->id = $get_id;
                                         $get_desc = $view_description_draft->view_draft_item_descriptions();
                                         $count = $get_desc->rowcount();
                                         $data = '';
@@ -296,13 +287,13 @@
 
     <!-- Bootstrap core JS-->
     <script src="dist/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/jqueryv3.6.4/jquery.min.js"></script>
+    <script src="assets/jqueryv3.6.4/jquery.min.js?v=1.2"></script>
     <script src="assets/toastr/toastr.min.js"></script>
     <script src="assets/select2/js/select2.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <script src="includes/js/draft_update.js"></script>
-    <script src="includes/js/functions/function.js?v=1.1"></script>
+    <script src="includes/js/functions/function.js?v=1.2"></script>
 
 </body>
 
