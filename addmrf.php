@@ -40,6 +40,20 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        #requestor {
+            width: 50%;
+        }
+
+        @media screen and (max-width: 990px) {
+            .inputreq {
+                width: 100%;
+            }
+
+            #requestor {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -60,7 +74,7 @@
                     </center>
                     <br>
                     <div class="row">
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <div class="label">Project <span style="color:red;">*</span></div>
                             <select type="text" id="project" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <option class="form-control" value="0" selected disabled>Please select project</option>
@@ -74,7 +88,7 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <div class="label">Type of Project <span style="color:red;">*</span></div>
                             <select type="text" id="project_type" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <option value="0" selected disabled>Please select type of project</option>
@@ -88,7 +102,7 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Classification <span style="color:red;">*</span></div>
                             <select type="text" id="classification" class="select2 form-control js-example-basic-single" style="width: 100%;">
@@ -104,35 +118,35 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Sub-Classification</div>
                             <input type="text" class="form-control text-secondary" id="sub_class" placeholder="Enter  Sub-Classification">
                         </div>
-                        <div class="col-5 mb-3">
+                        <div class="col-5 mb-3 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">CIP Account <span style="color:red;">*</span></div>
                             <select type="text" id="cip_account" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <option value="0" selected disabled>No project type selected</option>
                             </select>
                         </div>
-                        <div class="col-3 mb-2">
+                        <div class="col-3 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Approver <span style="color:red;">*</span></div>
                             <input type="text" class="form-control text-secondary" id="approver" placeholder="Enter Approver">
                         </div>
-                        <div class="col-6 mb-2">
+                        <div class="col-6 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <input type="checkbox" name="" id="checkbox" style="width: 30px; height:15px;">
                             <span class="fw-lighter text-body-secondary">Check if requested by the Foreman/Leadman</span>
-                            <input type="text" class="form-control text-secondary" id="requestor" placeholder="Requestor's Name" style="width: 50%;">
+                            <input type="text" class="form-control text-secondary inputreq" id="requestor" placeholder="Requestor's Name">
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- sub main -->
-            <div class="container-fluid mb-5">
+            <div class=" container-fluid mb-5">
                 <div class="sub-main mt-5 p-3 mb-5" style="background-color:#f9f9fb; border-radius:5px; box-shadow: 5px 5px 5px 5px #888888;">
                     <div class="row">
                         <center class="mb-3">
@@ -142,7 +156,7 @@
                         <form action="" method="post">
                             <div class="table-responsive">
                                 <button type="button" id="addrow" style="background-color:#5eb548; color:white; border:none;"><i class="bi bi-plus"></i> Add row</button>
-                                <table class="table table-bordered bg-white table-hover">
+                                <table class="table table-responsive table-bordered bg-white table-hover">
                                     <thead>
                                         <th style="width: 1rem;">
                                             Quantity <span style="color:red;">*</span>
@@ -193,7 +207,7 @@
 
     <!-- Bootstrap core JS-->
     <script src="dist/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/jqueryv3.6.4/jquery.min.js"></script>
+    <script src="assets/jqueryv3.6.4/jquery.min.js?v=1.1"></script>
 
     <script src="assets/toastr/toastr.min.js"></script>
     <script src="assets/select2/js/select2.min.js"></script>

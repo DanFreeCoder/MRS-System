@@ -51,6 +51,12 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             color: #535c68;
         }
+
+        @media screen and (max-width: 480px) {
+            .dashcard {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -80,7 +86,7 @@
                     $project_code = $admin_side->group_by_project();
                     while ($row = $project_code->fetch(PDO::FETCH_ASSOC)) {
                         echo '
-                        <div class="col-3">
+                        <div class="col-3 dashcard">
                         <div class="card" style="background-color: white; ">
                            <h1>' . $row['project_code'] . '</h1>
                             <small>' . $row['project_name'] . '</small>

@@ -42,6 +42,20 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        #requestor {
+            width: 50%;
+        }
+
+        @media screen and (max-width: 990px) {
+            .inputreq {
+                width: 100%;
+            }
+
+            #requestor {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -55,10 +69,9 @@
             <!-- Top navigation-->
             <?php include 'includes/navigation.php'; ?>
             <div class="container" style="margin-top: 100px;">
-
                 <?php
-                $get_id = $encryptor->decrypt_secretKey($_GET[md5('id')]);
 
+                $get_id = $encryptor->decrypt_secretKey($_GET[md5('id')]);
                 $view_description_draft->id = $get_id;
                 $result = $view_description_draft->drafted_data();
                 while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -77,7 +90,7 @@
                         <input type="text" id="get_id" value="<?php echo $get_id; ?>" hidden>
                     </center>
                     <div class="row">
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <div class="label">Project <span style="color:red;">*</span></div>
                             <select type="text" id="project" class="select2 form-control js-example-basic-single" style="width: 100%;">
                                 <?php
@@ -93,7 +106,7 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <div class="label">Type of Project <span style="color:red;">*</span></div>
                             <select type="text" id="project_type" class="select2 form-control js-example-basic-single" style="width: 100%">
                                 <?php
@@ -108,7 +121,7 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Classification <span style="color:red;">*</span></div>
                             <select type="text" id="classification" class="select2 form-control js-example-basic-single" style="width: 100%;">
@@ -124,13 +137,13 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-4 mb-2">
+                        <div class="col-4 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Sub-Classification</div>
                             <input type="text" class="form-control text-secondary" value="<?php echo $sub_class1; ?>" id="sub_class" placeholder="Enter  Sub-Classification">
                             <input type="text" id="id" value="<?php echo $get_id; ?>" hidden>
                         </div>
-                        <div class="col-5 mb-3">
+                        <div class="col-5 mb-3 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">CIP Account <span style="color:red;">*</span></div>
                             <select type="text" id="cip_account" class="select2 form-control js-example-basic-single" style="width: 100%;">
@@ -147,16 +160,16 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-3 mb-2">
+                        <div class="col-3 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <div class="label">Approver <span style="color:red;">*</span></div>
                             <input type="text" class="form-control text-secondary" id="approver" value="<?php echo $approver1 ?>" placeholder="Enter Approver">
                         </div>
-                        <div class="col-6 mb-2">
+                        <div class="col-6 mb-2 inputreq">
                             <!-- <div class="card mb-3" style="background-color:#f5f6fa"> -->
                             <input type="checkbox" name="" id="checkbox" style="width: 30px; height:15px;">
                             <span class="fw-lighter text-body-secondary">Check if requested by the Foreman/Leadman</span>
-                            <input type="text" class="form-control text-secondary" id="requestor" value="<?php echo $requestor ?>" placeholder="Requestor's Name" style="width: 50%;">
+                            <input type="text" class="form-control text-secondary inputreq" id="requestor" value="<?php echo $requestor ?>" placeholder="Requestor's Name">
                         </div>
                     </div>
                 </div>

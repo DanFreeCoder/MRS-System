@@ -26,6 +26,7 @@ if (!isset($_SESSION['firstname'])) {
     header('Location: controls/logout.php');
 }
 
+
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top">
     <div class="container-fluid">

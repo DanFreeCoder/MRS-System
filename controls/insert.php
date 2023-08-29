@@ -53,14 +53,14 @@ $generate->status = 1;
 $insert = $generate->generate();
 
 
-$data = json_decode($_POST['data']);
+$data = json_decode($_POST['data'], true);
 
-foreach ($data as $i => $row) {
-    $col1 = $row->qty;
-    $col2 = $row->uom;
-    $col3 = $row->code;
-    $col4 = $row->desc;
-    $col5 = $row->remark;
+foreach ($data as $row) {
+    $col1 = $row['qty'];
+    $col2 = $row['uom'];
+    $col3 = $row['code'];
+    $col4 = $row['desc'];
+    $col5 = $row['remark'];
 
     $itemdescriptions->qty = $col1;
     $itemdescriptions->oum = $col2;

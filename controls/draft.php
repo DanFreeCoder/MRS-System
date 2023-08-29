@@ -11,12 +11,6 @@ $proj_code = new clsType($db);
 $count_id = new clsType($db);
 
 
-// $get_count_id = $count_id->count_draft_id();
-// while ($row = $get_count_id->fetch(PDO::FETCH_ASSOC)) {
-//     $pro_id = $row['id'];
-// }
-
-
 $draft->date_added = date('Y-m-d');
 $draft->project = $_POST['project'];
 $draft->typeof_project = $_POST['project_type'];
