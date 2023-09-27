@@ -88,9 +88,9 @@
                         echo '
                         <div class="col-3 dashcard">
                         <div class="card" style="background-color: white; ">
-                           <h1>' . $row['project_code'] . '</h1>
+                           <h1>' . $row['pro_code'] . '</h1>
                             <small>' . $row['project_name'] . '</small>
-                            <h2>' . intval($row['series_number']) . '</h2>
+                            <h2>' . intval($row['total']) . '</h2>
                             
                         </div>
                     </div>
@@ -99,7 +99,6 @@
                     ?>
                 </div>
             </div>
-
 
             <!-- Submitted form Start -->
             <div class="container-fluid pt-2">

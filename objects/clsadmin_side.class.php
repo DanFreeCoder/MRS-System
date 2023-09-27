@@ -125,7 +125,7 @@ class admin_side
     }
     public function group_by_project()
     {
-        $sql = "SELECT project_code, series_number, status, project_name FROM `series_con_num` WHERE status != 0 GROUP BY project_code, series_number, project_name ORDER BY id ";
+        $sql = "SELECT COUNT(generateddata.project) as total, projects.Project as project_name, project_code.proj_code as pro_code, projects.id FROM generateddata, projects,project_code WHERE generateddata.project = projects.id AND generateddata.project = project_code.id AND generateddata.status != 0 GROUP BY projects.Project, project_code.proj_code";
         $sel = $this->con->prepare($sql);
 
         $sel->execute();
