@@ -13,6 +13,7 @@ $search_descby_id->itemcode = $_POST['itemcode'];
 $code = $search_descby_id->description_bycode();
 while ($row = $code->fetch(PDO::FETCH_ASSOC)) {
     $itemdesc = $row['itemdesc'];
+    $unit = $row['unit'];
 }
-$result = array($itemdesc);
+$result = array($itemdesc, $unit);
 echo json_encode($result);

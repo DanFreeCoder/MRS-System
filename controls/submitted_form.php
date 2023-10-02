@@ -1,17 +1,18 @@
 <?php
 include '../config/connection.php';
 include '../objects/clscip.class.php';
+include '../objects/clsEncryptor.php';
 session_start();
 $database = new clsMRFconnection();
 $db = $database->connect();
 
 $submitted = new clsType($db);
+$encryptor = new Encryptor();
 
 $data = array();
 $output = array();
 
 $sql = "SELECT generateddata.id, generateddata.date_added, generateddata.approver, projects.Project, type_of_project.project_type, CONCAT(class_of_item.class_item_id, '-', class_of_item.items) as classif, generateddata.sub_class, cip_type.cip_account as cip_name, generateddata.con_num FROM generateddata, projects, type_of_project, class_of_item, cip_type";
-//WHERE generateddata.project = projects.id AND generateddata.typeof_project = type_of_project.id AND generateddata.classification = class_of_item.class_item_id  AND generateddata.cip_account = cip_type.id AND generateddata.status != 4 AND generateddata.status != 2 AND generateddata.user_id = " . $_SESSION['id'] . " AND generateddata.status != 0 ORDER BY generateddata.con_num DESC
 $columns = array(
     0 => 'generateddata.date_added',
     1 => 'projects.Project',
@@ -61,7 +62,7 @@ while ($row = $get_data->fetch(PDO::FETCH_ASSOC)) {
     $cip_account = $row['cip_name'];
     $approver = $row['approver'];
     $con_num = $row['con_num'];
-    $action = '<a href="#" value="' . $row['id'] . '" class="views" >View</a><span class="text-success">||</span><a href="#" value="' . $row['id'] . '" class="print" >Print</a>';
+    $action = '<a href="#" value="' . $row['id'] . '" class="views" >View</a><span class="text-success">||</span><a href="#" value="' . $row['id'] . '" class="print" >Print</a><span class="text-success">||</span><a href="update.php?' . md5('id') . '=' . $encryptor->encrypt_secreKey($row['id']) . '" class="update">Update</a>';
 
     $data[] = array($date_added, $Project, $protype, $classification, $sub_class, $cip_account, $approver, $con_num, $action);
 }

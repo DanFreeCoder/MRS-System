@@ -100,7 +100,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="submitted-body">
-
+                                    <!-- server-side-proccess -->
                                 </tbody>
                             </table>
                         </div><!-- end of submitted form -->

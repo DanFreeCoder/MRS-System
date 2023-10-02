@@ -15,10 +15,32 @@ const ItemcodeGenerator = () => {
             }
         })
         //clicking specific field
+        var unit;
+        var concat;
         $(".desc").focus(function () {
             if (click != 0) {
                 var codeb = $('#findcode option:selected').val(); //value of selected description(itemcode)
-                var id = $(this).attr('id');//id of clicked fields 
+                var id = $(this).attr('id');//id of clicked fields
+                var codefind = $('#findcode option:selected').text();//text of selected description 
+                // get units
+                $.ajax({
+                    type: 'POST',
+                    url: 'controls/get_itemcode_units.php',
+                    data: { itemcode: codeb },
+                    success: function (response) {
+                        unit = JSON.parse(response)
+                        concat = `${codefind} - ${unit}`;
+                    }
+                });
+                // if id of uom field is equal to the id of itemcode
+                $('.oum').attr('id', function () {
+                    const uom_id = $(this).attr('id');
+                    if (uom_id.substring(4) == id.substring(4)) {//if true
+                        $(this).text(unit);//insert to specific field
+                    }
+                });
+
+
                 //if id of description field is equal to the id of itemcode
                 $('.code').attr('id', function () {
                     const code_id = $(this).attr('id');
@@ -26,8 +48,9 @@ const ItemcodeGenerator = () => {
                         $(this).text(codeb)
                     }
                 })
-                var codefind = $('#findcode option:selected').text();//text of selected description
-                $(this).text(codefind);//insert value to clicked fields
+
+                $(this).text(concat);//insert value to clicked fields
+
                 $('body').css('cursor', 'default');//back cursor to default
                 click -= 1;//reset to deafult value
             }
@@ -48,11 +71,13 @@ const ItemDescGenerator = () => {
                 var codefind = $('#finddesc option:selected').text();//text of selected description
                 var id = $(this).attr('id');//id of clicked fields 
 
+                var itemdesc;
+                var unit;
+                var concat;
                 //if id of description field is equal to the id of itemcode
                 $('.desc').attr('id', function () {
                     const desc_id = $(this).attr('id');
                     if (desc_id.substring(4) == id.substring(4)) {
-                        var result;
                         $.ajax({
                             type: 'post',
                             url: 'controls/descriptionby_id.php',
@@ -61,10 +86,14 @@ const ItemDescGenerator = () => {
                             dataType: 'html',
 
                             success: function (response) {
-                                result = response.replace("[", "").replace("]", "").replace('"', "").replace('"', "").replace(' "', "").replace('" ', ""); // remove unnecessary characters
+                                const result = JSON.parse(response)
+                                itemdesc = result[0];
+                                unit = result[1];
+
+                                concat = `${itemdesc} - ${unit}`;
                             }
                         })
-                        $(this).text(result);
+                        $(this).text(concat);
                         //auto replace & to and
                         var text = $(this).text();
                         var special = new RegExp('&');
@@ -73,9 +102,18 @@ const ItemDescGenerator = () => {
                             $(this).text(result)
                         }
                     }
-                })
+                });
 
                 $(this).text(codefind);//insert value to clicked fields
+
+                // if id of uom field is equal to the id of itemcode
+                $('.oum').attr('id', function () {
+                    const uom_id = $(this).attr('id');
+                    if (uom_id.substring(4) == id.substring(4)) {//if true
+                        $(this).text(unit);//insert to specific field
+                    }
+                });
+
                 $('body').css('cursor', 'default');//back cursor to default
                 clicks -= 1;//reset to deafult value
             }
@@ -84,7 +122,7 @@ const ItemDescGenerator = () => {
     //AUTO SELECT ITEM CODE & DESCRIPTION --end//
 }
 const restrictSpecialChar = () => {
-    // auto change '&' to 'and'
+    // auto change from '&' to 'and'
     $(document).on('keyup', '.editable-cell', function () {
         var text = $(this).text();
         var special = new RegExp('&');
@@ -93,7 +131,7 @@ const restrictSpecialChar = () => {
             $(this).text(result)
         }
     });
-    // auto change '&' to 'and'
+    // auto change from '&' to 'and'
     $(document).on('keyup', 'input', function () {
         var text = $(this).val();
         var special = new RegExp('&');

@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $('.finddesc').remove();
-    $('.findcode').remove();
+
     $('.submitted_table').dataTable({
         'serverSide': 'true',
         'processing': 'true',

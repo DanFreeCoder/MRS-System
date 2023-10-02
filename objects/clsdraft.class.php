@@ -76,4 +76,33 @@ class cls_draft
         $view->execute();
         return $view;
     }
+
+    public function View_for_remarks()
+    {
+        $sql = 'SELECT project, typeof_project, classification, sub_class, cip_account, approver, requestor, user_id FROM generateddata WHERE status != 0 AND id = ?';
+        $view = $this->con->prepare($sql);
+        $view->bindParam(1, $this->id);
+        $view->execute();
+        return $view;
+    }
+    public function view_for_remarks_item_descriptions()
+    {
+        $sql = "SELECT item_description.id, item_description.item_id, item_description.qty, item_description.oum, item_description.itemcode, item_description.description, item_description.remarks FROM item_description WHERE item_description.item_id = ? AND item_description.status != 0"; //drafted id
+        $view = $this->con->prepare($sql);
+        $view->bindParam(1, $this->id);
+
+        $view->execute();
+        return $view;
+    }
+
+    public function update_remarks()
+    {
+        $sql = 'UPDATE item_description SET remarks = ? WHERE id = ? AND status != 0';
+        $upd = $this->con->prepare($sql);
+
+        $upd->bindParam(1, $this->remarks);
+        $upd->bindParam(2, $this->id);
+
+        return ($upd->execute()) ? true : false;
+    }
 }

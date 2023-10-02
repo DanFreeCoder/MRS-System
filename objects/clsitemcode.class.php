@@ -40,12 +40,21 @@ class itemcode
 
     public function description_bycode()
     {
-        $sql = "SELECT itemdesc FROM itemcodes WHERE itemcode = ?";
+        $sql = "SELECT itemdesc,unit FROM itemcodes WHERE itemcode = ?";
         $desc = $this->con->prepare($sql);
 
         $desc->bindParam(1, $this->itemcode);
 
         $desc->execute();
         return $desc;
+    }
+
+    public function get_units($itemcode)
+    {
+        $sql = "SELECT unit FROM itemcodes WHERE itemcode LIKE '%" . $itemcode . "%' LIMIT 100";
+        $sel = $this->con->prepare($sql);
+
+        $sel->execute();
+        return $sel;
     }
 }

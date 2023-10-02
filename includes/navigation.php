@@ -38,13 +38,23 @@ if (!isset($_SESSION['firstname'])) {
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <span> &nbsp; &nbsp;</span>
-            <select name="" id="finddesc" class="select2  finddesc" style="width:30%;">
-                <option value="0" class="form-control">Enter Item Code</option>
-            </select>
-            <select name="" id="findcode" class="select2 findcode form-control" style="width: 70%;">
-                <option value="0" class="form-control">Enter Item Description</option>
-            </select>
+            <?php
+            //check what current page url
+            $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
+            $curPageName;
+            if ($curPageName == 'addmrf.php' || $curPageName == 'draft.php') {
+                echo '
+                <span> &nbsp; &nbsp;</span>
+                <select name="" id="finddesc" class="select2  finddesc" style="width:30%;">
+                    <option value="0" class="form-control">Enter Item Code</option>
+                </select>
+                <select name="" id="findcode" class="select2 findcode form-control" style="width: 70%;">
+                    <option value="0" class="form-control">Enter Item Description</option>
+                </select>
+                ';
+            }
+            ?>
+
             <span> &nbsp; &nbsp;</span>
             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                 <li class="nav-item active"><a class="nav-link" href="home.php"><b>Dashboard</b></a></li>
